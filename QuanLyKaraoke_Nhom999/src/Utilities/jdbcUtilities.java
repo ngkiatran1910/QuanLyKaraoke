@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class jdbcUtilities {
 
-    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=EduSys";
+    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYKARAOKE";
     static String username = "sa";
     static String password = "123";
 

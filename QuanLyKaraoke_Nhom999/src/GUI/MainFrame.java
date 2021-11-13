@@ -1,17 +1,29 @@
 package GUI;
 
+import Models.DichVu;
+import Models.LoaiDichVu;
+import Services.DichVuService;
+import Services.LoaiDichVuService;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
     CardLayout card;
+    DichVuService dvs = new DichVuService();
+    int index;
 
     public MainFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         card = (CardLayout) pnCardGoc.getLayout();
         card.show(pnCardGoc, "card1");
+        fillTableDichVu();
+        fillTableTop5DichVu();
     }
 
     /**
@@ -1334,6 +1346,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel56.setLayout(new java.awt.GridLayout(1, 3, 60, 0));
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         jPanel56.add(btnThem);
 
         btnSua.setText("Sửa");
@@ -1363,6 +1380,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblBangDV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBangDVMouseClicked(evt);
             }
         });
         jScrollPane8.setViewportView(tblBangDV);
@@ -2143,6 +2165,21 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton32ActionPerformed
 
+    private void tblBangDVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangDVMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.index = tblBangDV.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
+            if (this.index >= 0) {
+                edit();
+            }
+        }
+    }//GEN-LAST:event_tblBangDVMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        add();
+    }//GEN-LAST:event_btnThemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2433,4 +2470,107 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenDV;
     // End of variables declaration//GEN-END:variables
+
+    private void fillTableDichVu() {
+        DefaultTableModel model = (DefaultTableModel) tblBangDV.getModel();
+        model.setRowCount(0);
+        try {
+            List<DichVu> list = dvs.selectAll();
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getMaDV(),
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getDonViTinh(),
+                    dv.getGiaDV(),};
+                model.addRow(row);
+            }
+            fillComboBoxDV();
+        } catch (Exception e) {
+        }
+    }
+
+    private void showDTDV() {
+        DichVu dv = new DichVu();
+        txtMaDV.setText((String) tblBangDV.getValueAt(index, 0));
+        txtTenDV.setText((String) tblBangDV.getValueAt(index, 1));
+        txtDonVi.setText((String) tblBangDV.getValueAt(index, 3));
+        txtGia.setText((String) tblBangDV.getValueAt(index, 4));
+        txtSoLuong.setText((String) tblBangDV.getValueAt(index, 2));
+        cboLoaiDV.getSelectedItem();
+        if (dv.getTrangThai() == 0) {
+            rdoConHang.setSelected(true);
+        } else {
+            rdoHetHang.setSelected(true);
+        }
+    }
+
+    private void edit() {
+        try {
+            String MaDV = (String) tblBangDV.getValueAt(index, 0);
+            DichVu dv = (DichVu) dvs.selectByID(MaDV);
+            if (dv != null) {
+                showDTDV();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    LoaiDichVuService ldvs = new LoaiDichVuService();
+    
+    private void fillComboBoxDV() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiDV.getModel(); //kết nối cbo với model
+        model.removeAllElements(); //xóa toàn bộ item
+        try {
+            List<LoaiDichVu> list = ldvs.selectAll();
+            for (LoaiDichVu dv : list) {
+                model.addElement(dv);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void fillTableTop5DichVu() {
+        DefaultTableModel model = (DefaultTableModel) tblBangDV.getModel();
+        model.setRowCount(0);
+        try {
+            List<DichVu> list = dvs.selectAll();
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getMaDV(),
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getDonViTinh(),
+                    dv.getGiaDV(),};
+                model.addRow(row);
+            }
+            fillComboBoxDV();
+        } catch (Exception e) {
+        }
+    }
+
+    private void add() {
+        try {
+            String madv = txtMaDV.getText();
+            String tendv = txtTenDV.getText();
+            double gia = Double.parseDouble(txtGia.getText());
+            String donvi = txtDonVi.getText();
+            int soLuong = Integer.parseInt(txtSoLuong.getText());
+            LoaiDichVu loaidv = (LoaiDichVu) cboLoaiDV.getSelectedItem();
+            int trangthai;
+            if (rdoConHang.isSelected()) {
+                trangthai = 0;
+            } else {
+                trangthai = 1;
+            }
+            dvs.them(new Object[]{madv, tendv, gia, soLuong, donvi, trangthai, loaidv});
+            fillTableDichVu();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            e.printStackTrace();
+        }
+    }
 }
