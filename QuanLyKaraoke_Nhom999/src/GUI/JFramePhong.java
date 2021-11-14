@@ -18,6 +18,7 @@ public class JFramePhong extends javax.swing.JFrame {
     public JFramePhong() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         fillTablePhong();
         fillTableTop5Phong();
     }
