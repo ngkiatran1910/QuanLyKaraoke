@@ -677,7 +677,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
-        // TODO add your handling code here:
+        JFrameTaiKhoan frmTK = new JFrameTaiKhoan();
+        frmTK.setVisible(true);
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     /**
