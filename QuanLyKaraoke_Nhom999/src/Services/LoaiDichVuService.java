@@ -15,8 +15,6 @@ import java.sql.ResultSet;
  */
 public class LoaiDichVuService extends IServices.IServiceLoaiDichVu{
 
-    LoaiDichVu dv = new LoaiDichVu();
-
     private List<LoaiDichVu> selectBySql(String sql, Object... args) {
         List<LoaiDichVu> list = new ArrayList<>();
         try {

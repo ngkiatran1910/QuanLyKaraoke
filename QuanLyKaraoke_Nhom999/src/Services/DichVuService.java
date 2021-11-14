@@ -75,5 +75,9 @@ public class DichVuService extends IServices.IServiceDichVu {
         String sql = "";
         return selectBySql(sql);
     }
+    public List<DichVu> selectByLoaiDichVu(String MaLDV) {
+        String sql = "SELECT * FROM DichVu WHERE MaLDV = ?";
+        return this.selectBySql(sql, MaLDV);
+    }
 
 }
