@@ -1,12 +1,26 @@
 
 package GUI;
 
+import Models.DichVu;
+import Models.LoaiDichVu;
+import Services.DichVuService;
+import Services.LoaiDichVuService;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 public class JFrameDichVu extends javax.swing.JFrame {
 
+    int index;
+    LoaiDichVuService ldvs = new LoaiDichVuService();
+    DichVuService dvs = new DichVuService();
     public JFrameDichVu() {
         initComponents();
         setLocationRelativeTo(null);
+        fillCombo();
+        fillToTableDV();
     }
 
     /**
@@ -251,6 +265,11 @@ public class JFrameDichVu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDichVuMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblDichVu);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -368,6 +387,15 @@ public class JFrameDichVu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void tblDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.index = tblDichVu.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                showDTDV();
+            }
+        }
+    }//GEN-LAST:event_tblDichVuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -434,4 +462,57 @@ public class JFrameDichVu extends javax.swing.JFrame {
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenDV;
     // End of variables declaration//GEN-END:variables
+private void fillToTableDV() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+        model.setRowCount(0);
+        try {
+            List<DichVu> list = dvs.selectAll();
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getMaDV(),
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getDonViTinh(),
+                    dv.getGiaDV(),
+                    dv.getMaLDV(),};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void showDTDV() {
+        try {
+            String madv = (String) tblDichVu.getValueAt(this.index, 0);
+            DichVu dv = dvs.selectByID(madv);
+            LoaiDichVu ldv = (LoaiDichVu) ldvs.selectByID(dv.getMaLDV());
+            if (dv != null) {
+                txtMaDV.setText(dv.getMaDV());
+                txtTenDV.setText(dv.getTenDV());
+                txtSoLuong.setText(dv.getSoLuong() + "");
+                txtDonVi.setText(dv.getDonViTinh());
+                txtGia.setText(dv.getGiaDV() + "");
+                if (dv.getTrangThai() == 0) {
+                    rdoConHang.setSelected(true);
+                } else {
+                    rdoHetHang.setSelected(true);
+                }
+                cboLoaiDV.setSelectedItem(ldv.getTenLDV());
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi đổ dữ liệu lên txt");
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void fillCombo() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiDV.getModel();
+        model.removeAllElements();
+        List<LoaiDichVu> list = ldvs.selectAll();
+        for (LoaiDichVu cd : list) {
+            model.addElement(cd);
+        }
+    }
 }
