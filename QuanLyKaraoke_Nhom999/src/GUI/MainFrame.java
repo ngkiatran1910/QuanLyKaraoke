@@ -1,13 +1,5 @@
 package GUI;
 
-import Models.DichVu;
-import Models.LoaiDichVu;
-import Services.LoaiDichVuService;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 public class MainFrame extends javax.swing.JFrame {
 
 
@@ -567,6 +559,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnPhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPhong.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnPhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhongActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPhong);
 
         btnDichVu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -680,6 +677,12 @@ public class MainFrame extends javax.swing.JFrame {
         JFrameTaiKhoan frmTK = new JFrameTaiKhoan();
         frmTK.setVisible(true);
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
+
+    private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
+        // TODO add your handling code here:
+        JFramePhong frmP = new JFramePhong();
+        frmP.setVisible(true);
+    }//GEN-LAST:event_btnPhongActionPerformed
 
     /**
      * @param args the command line arguments
