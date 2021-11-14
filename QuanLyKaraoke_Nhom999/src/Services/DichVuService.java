@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
 
-public class DichVuService extends IServices.IServiceDichVu {
+public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
 
     DichVu dv = new DichVu();
 
@@ -33,7 +33,18 @@ public class DichVuService extends IServices.IServiceDichVu {
     }
 
     @Override
-    public void them(Object model) {
+    public List selectAll() {
+        String sql = "SELECT * FROM DichVu";
+        return selectBySql(sql);
+    }
+
+    public List selectTop5() {
+        String sql = "";
+        return selectBySql(sql);
+    }
+
+    @Override
+    public void them(DichVu model) {
         String sql = "INSERT INTO DichVu (MaDV,TenDV,GiaDV,SoLuong,DonViTinh,TrangThai,MaLDV) VALUES (?,?,?,?,?,?,?)";
         jdbcUtilities.update(sql,
                 dv.getMaDV(),
@@ -46,7 +57,7 @@ public class DichVuService extends IServices.IServiceDichVu {
     }
 
     @Override
-    public void sua(Object model) {
+    public void sua(DichVu model) {
         String sql = "UPDATE DichVu SET TenDV=?,GiaDV=?,SoLuong=?,DonViTinh=?,TrangThai=?,MaLDV=? WHERE MaDV=?";
         jdbcUtilities.update(sql,
                 dv.getTenDV(),
@@ -59,21 +70,10 @@ public class DichVuService extends IServices.IServiceDichVu {
     }
 
     @Override
-    public Object selectByID(Object key) {
+    public DichVu selectByID(String key) {
         String sql = "SELECT * FROM DichVu WHERE MaDV = ?";
         List<DichVu> list = selectBySql(sql, key);
         return list.size() > 0 ? list.get(0) : null;
-    }
-
-    @Override
-    public List selectAll() {
-        String sql = "SELECT * FROM DichVu";
-        return selectBySql(sql);
-    }
-
-    public List selectTop5() {
-        String sql = "";
-        return selectBySql(sql);
     }
 
 }
