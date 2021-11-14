@@ -6,10 +6,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Admin
- */
 public class JFramePhong extends javax.swing.JFrame {
 
     PhongService ps = new PhongService();
@@ -276,12 +272,10 @@ public class JFramePhong extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
         add();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        // TODO add your handling code here:
         clear();
     }//GEN-LAST:event_btnMoiActionPerformed
 
@@ -291,7 +285,6 @@ public class JFramePhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
-        // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.index = tblPhong.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
