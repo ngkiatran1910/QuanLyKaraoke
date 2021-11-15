@@ -45,7 +45,8 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lý karaoke - Khách hàng");
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 

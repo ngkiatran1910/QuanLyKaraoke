@@ -9,7 +9,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Karaoke - Qu&#x1ea3;n l&#xfd; t&#xe0;i kho&#x1ea3;n"/>
+    <Property name="title" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; karaoke - T&#xe0;i kho&#x1ea3;n"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

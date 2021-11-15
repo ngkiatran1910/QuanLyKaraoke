@@ -56,7 +56,7 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
         tblBangTaiKhoan = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Karaoke - Quản lý tài khoản");
+        setTitle("Quản lý karaoke - Tài khoản");
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 

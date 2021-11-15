@@ -1,8 +1,10 @@
 package GUI;
 
+import java.awt.CardLayout;
+
 public class MainFrame extends javax.swing.JFrame {
 
-
+    CardLayout card;
     int index;
 
     public MainFrame() {
@@ -108,7 +110,7 @@ public class MainFrame extends javax.swing.JFrame {
         tnGhiChuNhanh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("QUẢN LÝ KARAOKE");
+        setTitle("Quản lý karaoke - Trang chủ");
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -530,6 +532,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnManChinh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnManChinh.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnManChinh.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnManChinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManChinhActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnManChinh);
 
         btnTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -551,6 +558,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnKhachHang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKhachHang.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnKhachHang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnKhachHang);
 
         btnPhong.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -572,6 +584,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnDichVu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDichVu.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnDichVu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDichVuActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnDichVu);
 
         btnGioiThieu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -588,6 +605,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnThongKe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThongKe.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnThongKe.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnThongKe);
 
         tnGhiChuNhanh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -679,10 +701,28 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
-        // TODO add your handling code here:
         JFramePhong frmP = new JFramePhong();
         frmP.setVisible(true);
     }//GEN-LAST:event_btnPhongActionPerformed
+
+    private void btnManChinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManChinhActionPerformed
+
+    }//GEN-LAST:event_btnManChinhActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        JFrameKhachHang frmKH = new JFrameKhachHang();
+        frmKH.setVisible(true);
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
+        JFrameDichVu frmDV = new JFrameDichVu();
+        frmDV.setVisible(true);
+    }//GEN-LAST:event_btnDichVuActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        JFrameThongKe frmTK = new JFrameThongKe();
+        frmTK.setVisible(true);
+    }//GEN-LAST:event_btnThongKeActionPerformed
 
     /**
      * @param args the command line arguments

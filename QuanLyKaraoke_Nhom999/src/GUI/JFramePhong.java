@@ -50,7 +50,8 @@ public class JFramePhong extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTop5Phong = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lý karaoke - Phòng");
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -285,7 +286,7 @@ public class JFramePhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             this.index = tblPhong.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
                 this.edit();

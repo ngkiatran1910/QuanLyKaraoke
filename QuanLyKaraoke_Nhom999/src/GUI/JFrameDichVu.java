@@ -62,8 +62,8 @@ public class JFrameDichVu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quản lý dịch vụ");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lý karaoke - dịch vụ");
 
         jPanel2.setBackground(new java.awt.Color(254, 204, 213));
 
