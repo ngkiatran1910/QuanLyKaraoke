@@ -1,11 +1,13 @@
 package GUI;
 
+import Models.CTHoaDonTam;
 import Models.DichVu;
 import Models.LoaiDichVu;
 import Services.DichVuService;
 import Services.LoaiDichVuService;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -19,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     Thread tbd, tkt, d;
     LoaiDichVuService ldvs = new LoaiDichVuService();
     DichVuService dvs = new DichVuService();
+    ArrayList<CTHoaDonTam> list = new ArrayList();
 
     public MainFrame() {
         initComponents();
@@ -98,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblHoaDon = new javax.swing.JTable();
         jPanel20 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -426,7 +429,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel19.setLayout(new java.awt.GridLayout(1, 0));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -434,7 +437,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Tên dịch vụ", "Số lượng", "Thành tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblHoaDon);
 
         jPanel19.add(jScrollPane2);
 
@@ -518,6 +521,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton37.setText("THÊM VÀO HÓA ĐƠN");
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
         jPanel12.add(jButton37);
 
         jPanel10.add(jPanel12);
@@ -750,6 +758,30 @@ public class MainFrame extends javax.swing.JFrame {
         fillToTableDV();
     }//GEN-LAST:event_cboLoaiDVItemStateChanged
 
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        try {
+            if (tblDichVu.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn dịch vụ");
+                return;
+            } else {
+                String kq = JOptionPane.showInputDialog(this, "Mời nhập số lượng");
+                if (kq != null) {
+                    for (int row : tblDichVu.getSelectedRows()) {
+                        CTHoaDonTam hd = new CTHoaDonTam();
+                        hd.setTenDV((String) tblDichVu.getValueAt(index, 0));
+                        hd.setSoLuong(Integer.parseInt(kq));
+                        hd.setGiaTien((float) tblDichVu.getValueAt(index, 1));
+                    }
+                    fillToTableHoaDon();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập số lượng");
+                }
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton37ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -864,7 +896,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblNgay;
@@ -874,6 +905,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnCardGoc;
     private javax.swing.JPanel pnCardManChinh;
     private javax.swing.JTable tblDichVu;
+    private javax.swing.JTable tblHoaDon;
     private javax.swing.JButton tnGhiChuNhanh;
     // End of variables declaration//GEN-END:variables
 
@@ -962,6 +994,23 @@ public class MainFrame extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
+        }
+    }
+
+    private void fillToTableHoaDon() {
+        DefaultTableModel model_hd = (DefaultTableModel) tblHoaDon.getModel();
+        model_hd.setRowCount(0);
+        try {
+            ArrayList<CTHoaDonTam> list = new ArrayList();
+            for (CTHoaDonTam hd : list) {
+                Object[] row = new Object[]{
+                    hd.getTenDV(),
+                    hd.getSoLuong(),
+                    hd.ThanhTien(),};
+                model_hd.addRow(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
