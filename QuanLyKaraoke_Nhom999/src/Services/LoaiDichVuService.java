@@ -13,12 +13,11 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class LoaiDichVuService extends IServices.IServiceLoaiDichVu{
+public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, String>{
 
-    LoaiDichVu dv = new LoaiDichVu();
-
-    private List<LoaiDichVu> selectBySql(String sql, Object... args) {
-        List<LoaiDichVu> list = new ArrayList<>();
+    @Override
+    protected List selectBySql(String sql, Object... args) {
+                List<LoaiDichVu> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcUtilities.query(sql, args);
             while (rs.next()) {
@@ -33,25 +32,25 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu{
             throw new RuntimeException(e);
         }
     }
+
     @Override
-    public void them(Object model) {
+    public void them(LoaiDichVu model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void sua(Object model) {
+    public void sua(LoaiDichVu model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object selectByID(Object key) {
+    public LoaiDichVu selectByID(String key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List selectAll() {
-        String sql = "SELECT * FROM LoaiDichVu";
-        return selectBySql(sql);
+    public List<LoaiDichVu> selectAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

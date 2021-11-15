@@ -11,8 +11,10 @@ public class validateUtilities {
         if(ck.isEmpty()) {
             JOptionPane.showMessageDialog(null, ms);
             return true;
+        }else {
+            return false;
         }
-        return false;
+        
     }
     
 }

@@ -8,9 +8,53 @@ import java.sql.ResultSet;
 
 public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
 
-    DichVu dv = new DichVu();
 
-    private List<DichVu> selectBySql(String sql, Object... args) {
+    @Override
+    public List selectAll() {
+        String sql = "SELECT * FROM DichVu";
+        return selectBySql(sql);
+    }
+
+    public List selectTop5() {
+        String sql = "";
+        return selectBySql(sql);
+    }
+
+    @Override
+    public void them(DichVu model) {
+        String sql = "INSERT INTO DichVu (MaDV,TenDV,GiaDV,SoLuong,DonViTinh,TrangThai,MaLDV) VALUES (?,?,?,?,?,?,?)";
+        jdbcUtilities.update(sql,
+                model.getMaDV(),
+                model.getTenDV(),
+                model.getGiaDV(),
+                model.getSoLuong(),
+                model.getDonViTinh(),
+                model.getTrangThai(),
+                model.getMaLDV());
+    }
+
+    @Override
+    public void sua(DichVu model) {
+        String sql = "UPDATE DichVu SET TenDV=?,GiaDV=?,SoLuong=?,DonViTinh=?,TrangThai=?,MaLDV=? WHERE MaDV=?";
+        jdbcUtilities.update(sql,
+                model.getTenDV(),
+                model.getGiaDV(),
+                model.getSoLuong(),
+                model.getDonViTinh(),
+                model.getTrangThai(),
+                model.getMaLDV(),
+                model.getMaDV());
+    }
+
+    @Override
+    public DichVu selectByID(String key) {
+        String sql = "SELECT * FROM DichVu WHERE MaDV = ?";
+        List<DichVu> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+
+    @Override
+    protected List<DichVu> selectBySql(String sql, Object... args) {
         List<DichVu> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcUtilities.query(sql, args);
@@ -30,50 +74,6 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public List selectAll() {
-        String sql = "SELECT * FROM DichVu";
-        return selectBySql(sql);
-    }
-
-    public List selectTop5() {
-        String sql = "";
-        return selectBySql(sql);
-    }
-
-    @Override
-    public void them(DichVu model) {
-        String sql = "INSERT INTO DichVu (MaDV,TenDV,GiaDV,SoLuong,DonViTinh,TrangThai,MaLDV) VALUES (?,?,?,?,?,?,?)";
-        jdbcUtilities.update(sql,
-                dv.getMaDV(),
-                dv.getTenDV(),
-                dv.getGiaDV(),
-                dv.getSoLuong(),
-                dv.getDonViTinh(),
-                dv.getTrangThai(),
-                dv.getMaLDV());
-    }
-
-    @Override
-    public void sua(DichVu model) {
-        String sql = "UPDATE DichVu SET TenDV=?,GiaDV=?,SoLuong=?,DonViTinh=?,TrangThai=?,MaLDV=? WHERE MaDV=?";
-        jdbcUtilities.update(sql,
-                dv.getTenDV(),
-                dv.getGiaDV(),
-                dv.getSoLuong(),
-                dv.getDonViTinh(),
-                dv.getTrangThai(),
-                dv.getMaLDV(),
-                dv.getMaDV());
-    }
-
-    @Override
-    public DichVu selectByID(String key) {
-        String sql = "SELECT * FROM DichVu WHERE MaDV = ?";
-        List<DichVu> list = selectBySql(sql, key);
-        return list.size() > 0 ? list.get(0) : null;
     }
 
 }

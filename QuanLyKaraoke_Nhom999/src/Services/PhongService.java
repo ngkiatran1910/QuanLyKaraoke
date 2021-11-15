@@ -8,27 +8,6 @@ import java.sql.ResultSet;
 
 public class PhongService extends IServices.IServicePhong<Phong, String> {
 
-    Phong p = new Phong();
-
-    private List<Phong> selectBySql(String sql, Object... args) {
-        List<Phong> list = new ArrayList<>();
-        try {
-            ResultSet rs = jdbcUtilities.query(sql, args);
-            while (rs.next()) {
-                Phong model = new Phong();
-                model.setMaP(rs.getString("MaP"));
-                model.setMaLP(rs.getString("MaLP"));
-                model.setTrangThai(rs.getInt("TrangThai"));
-                model.setTang(rs.getInt("Tang"));
-                list.add(model);
-            }
-            rs.getStatement().getConnection().close();
-            return list;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public List selectAll() {
         String sql = "SELECT * FROM Phong";
@@ -63,6 +42,26 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    protected List<Phong> selectBySql(String sql, Object... args) {
+        List<Phong> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                Phong model = new Phong();
+                model.setMaP(rs.getString("MaP"));
+                model.setMaLP(rs.getString("MaLP"));
+                model.setTrangThai(rs.getInt("TrangThai"));
+                model.setTang(rs.getInt("Tang"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

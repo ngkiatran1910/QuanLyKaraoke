@@ -343,11 +343,34 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        validateUtilities.checkRong(txtMaNV.getText(), "Mã nhân viên không được trống!");
+        if (validateUtilities.checkRong(txtMaNV.getText(), "Mã nhân viên không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtTenNV.getText(), "Tên nhân viên không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtMK.getText(), "Mật khẩu không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtXNMK.getText(), "Xác nhận mật khẩu không được trống!")) {
+            return;
+        }
         them();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        if (validateUtilities.checkRong(txtMaNV.getText(), "Mã nhân viên không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtTenNV.getText(), "Tên nhân viên không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtMK.getText(), "Mật khẩu không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtXNMK.getText(), "Xác nhận mật khẩu không được trống!")) {
+            return;
+        }
         sua();
     }//GEN-LAST:event_btnSuaActionPerformed
 
