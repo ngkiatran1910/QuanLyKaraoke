@@ -1,14 +1,16 @@
-
 package GUI;
+
 import Models.TaiKhoan;
 import Services.TaiKhoanService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilities.validateUtilities;
 
 public class JFrameTaiKhoan extends javax.swing.JFrame {
 
     TaiKhoanService taiKhaoDAO = new TaiKhoanService();
+
     public JFrameTaiKhoan() {
         initComponents();
         setLocationRelativeTo(null);
@@ -34,8 +36,6 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
         lblXNMK = new javax.swing.JLabel();
         txtMaNV = new javax.swing.JTextField();
         txtTenNV = new javax.swing.JTextField();
-        txtMK = new javax.swing.JTextField();
-        txtXNMK = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
@@ -47,6 +47,8 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
         lblChucVu = new javax.swing.JLabel();
         rdoNhanVien = new javax.swing.JRadioButton();
         rdoQuanLy = new javax.swing.JRadioButton();
+        txtMK = new javax.swing.JPasswordField();
+        txtXNMK = new javax.swing.JPasswordField();
         lblTitle = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -190,11 +192,11 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
                             .addComponent(lblTenNV, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblMaNV, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(43, 43, 43)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(txtMK)
+                            .addComponent(txtXNMK))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
@@ -220,12 +222,12 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
                             .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMK))
+                            .addComponent(lblMK)
+                            .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtXNMK)
-                            .addComponent(lblXNMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,6 +343,7 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+//        validateUtilities.checkRong(txtMaNV.getText(), "Mã nhân viên không được trống!");
         them();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -357,24 +360,24 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
         if (r < 0) {
             return;
         }
-        
-        String chucVu =tblBangTaiKhoan.getValueAt(r, 3).toString();
-        int trangThai = Integer.valueOf(tblBangTaiKhoan.getValueAt(r, 4).toString());
+
+        String chucVu = tblBangTaiKhoan.getValueAt(r, 3).toString();
+        String trangThai = tblBangTaiKhoan.getValueAt(r, 4).toString();
         boolean tt;
         boolean cv;
-        
-        if(chucVu == "Nhân viên") {
-            cv =true;
-        }else{
-            cv=false;
+
+        if (chucVu == "Nhân viên") {
+            cv = true;
+        } else {
+            cv = false;
         }
-        
-        if(trangThai == 0) {
-            tt=true;
-        }else {
-            tt=false;
+
+        if (trangThai == "Hoạt Động") {
+            tt = true;
+        } else {
+            tt = false;
         }
-        
+
         txtMaNV.setText(tblBangTaiKhoan.getValueAt(r, 0).toString());
         txtTenNV.setText(tblBangTaiKhoan.getValueAt(r, 1).toString());
         txtMK.setText(tblBangTaiKhoan.getValueAt(r, 2).toString());
@@ -445,31 +448,35 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoNhanVien;
     private javax.swing.JRadioButton rdoQuanLy;
     private javax.swing.JTable tblBangTaiKhoan;
-    private javax.swing.JTextField txtMK;
+    private javax.swing.JPasswordField txtMK;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtTenNV;
-    private javax.swing.JTextField txtXNMK;
+    private javax.swing.JPasswordField txtXNMK;
     // End of variables declaration//GEN-END:variables
 
     private void them() {
         TaiKhoan tk = getForm();
-        try {
-            taiKhaoDAO.them(tk);
-            JOptionPane.showMessageDialog(this, "Thêm thành công nhân viên: " + txtTenNV.getText());
-            fillToTable();
-            clear();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi thêm dữ liệu");
-            return;
+        String xnmk = txtXNMK.getText();
+        if (!xnmk.equals(tk.getMatKhau())) {
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không khớp!");
+        } else {
+            try {
+                taiKhaoDAO.them(tk);
+                JOptionPane.showMessageDialog(this, "Thêm thành công nhân viên: " + txtTenNV.getText());
+                fillToTable();
+                clear();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
-    
+
     TaiKhoan getForm() {
         int tt;
-        if(rdoHoatDong.isSelected()) {
-            tt=0;
-        }else{
-            tt=1;
+        if (rdoHoatDong.isSelected()) {
+            tt = 0;
+        } else {
+            tt = 1;
         }
         TaiKhoan tk = new TaiKhoan();
         tk.setMaNV(txtMaNV.getText());
@@ -490,13 +497,12 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
                     tk.getMaNV(),
                     tk.getTenNV(),
                     tk.getMatKhau(),
-                    tk.isChucVu()? "Nhân viên" : "Quản lý",
-                    tk.getTrangThai(),
-                };
+                    tk.isChucVu() ? "Nhân viên" : "Quản lý",
+                    tk.trangThai(tk.getTrangThai()),};
                 model.addRow(row);
             }
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(this, "Lỗi đổ dữ liệu lên bảng");
+            JOptionPane.showMessageDialog(this, "Lỗi đổ dữ liệu lên bảng");
         }
     }
 
@@ -508,20 +514,20 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
         rdoHoatDong.isSelected();
         rdoNhanVien.isSelected();
     }
-    
-    private void setForm(TaiKhoan tk){
+
+    private void setForm(TaiKhoan tk) {
         txtMaNV.setText(tk.getMaNV());
         txtTenNV.setText(tk.getTenNV());
         txtMK.setText(tk.getMatKhau());
         rdoNhanVien.setSelected(tk.isChucVu());
-        int tt=0;
-        if(tt==0) {
+        int tt = 0;
+        if (tt == 0) {
             rdoHoatDong.setSelected(true);
-        }else{
+        } else {
             rdoNgungHoatDong.setSelected(true);
         }
     }
-    
+
     private void sua() {
         TaiKhoan tk = getForm();
         try {
@@ -533,6 +539,5 @@ public class JFrameTaiKhoan extends javax.swing.JFrame {
             return;
         }
     }
-    
-}
 
+}

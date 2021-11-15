@@ -63,5 +63,13 @@ public class TaiKhoan {
         return "TaiKhoan{" + "MaNV=" + MaNV + ", TenNV=" + TenNV + ", MatKhau=" + MatKhau + ", ChucVu=" + ChucVu + ", TrangThai=" + TrangThai + '}';
     }
     
+    public String trangThai(int tt) {
+        if(tt==0) {
+            return "Hoạt Động";
+        }else {
+            return "Ngưng Hoạt Động";
+        }
+    }
+    
     
 }
