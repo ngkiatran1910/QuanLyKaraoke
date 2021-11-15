@@ -50,7 +50,8 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
 
     @Override
     public List<LoaiDichVu> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM LoaiDichVu";
+        return selectBySql(sql);
     }
     
 }

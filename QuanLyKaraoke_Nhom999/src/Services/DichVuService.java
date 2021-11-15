@@ -75,5 +75,10 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
             throw new RuntimeException(e);
         }
     }
+    
+     public List<DichVu> selectByLoaiDV(String MaLDV) {
+        String sql = "SELECT * FROM DichVu WHERE MaLDV = ?";
+        return this.selectBySql(sql, MaLDV);
+    }
 
 }

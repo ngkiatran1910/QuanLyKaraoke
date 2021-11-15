@@ -1,16 +1,32 @@
 package GUI;
 
+import Models.DichVu;
+import Models.LoaiDichVu;
+import Services.DichVuService;
+import Services.LoaiDichVuService;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
     CardLayout card;
     int index;
+    Thread tbd, tkt, d;
+    LoaiDichVuService ldvs = new LoaiDichVuService();
+    DichVuService dvs = new DichVuService();
 
     public MainFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-
+        timeBD();
+        timKT();
+        dateNow();
+        fillComboDV();
     }
 
     /**
@@ -63,22 +79,22 @@ public class MainFrame extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton34 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jButton36 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        lblTimeBD = new javax.swing.JLabel();
+        btnBatDau = new javax.swing.JButton();
+        lblNgay = new javax.swing.JLabel();
+        lblTimeKT = new javax.swing.JLabel();
+        btnKetThuc = new javax.swing.JButton();
+        lblTrangThai = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboLoaiDV = new javax.swing.JComboBox<>();
         jPanel22 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblDichVu = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -111,6 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý karaoke - Trang chủ");
+        setPreferredSize(new java.awt.Dimension(1000, 705));
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -287,35 +304,35 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel15.setBackground(new java.awt.Color(254, 204, 213));
         jPanel15.setLayout(new java.awt.GridLayout(2, 3, 55, 5));
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("19:05:35");
-        jPanel15.add(jLabel6);
+        lblTimeBD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTimeBD.setText("19:05:35");
+        jPanel15.add(lblTimeBD);
 
-        jButton34.setText("Bắt đầu");
-        jButton34.addActionListener(new java.awt.event.ActionListener() {
+        btnBatDau.setText("Bắt đầu");
+        btnBatDau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton34ActionPerformed(evt);
+                btnBatDauActionPerformed(evt);
             }
         });
-        jPanel15.add(jButton34);
+        jPanel15.add(btnBatDau);
 
-        jLabel8.setText("Ngày: 11/10/2021");
-        jPanel15.add(jLabel8);
+        lblNgay.setText("Ngày: 11/10/2021");
+        jPanel15.add(lblNgay);
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("__:__:__");
-        jPanel15.add(jLabel7);
+        lblTimeKT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTimeKT.setText("__:__:__");
+        jPanel15.add(lblTimeKT);
 
-        jButton36.setText("Kết thúc");
-        jButton36.addActionListener(new java.awt.event.ActionListener() {
+        btnKetThuc.setText("Kết thúc");
+        btnKetThuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton36ActionPerformed(evt);
+                btnKetThucActionPerformed(evt);
             }
         });
-        jPanel15.add(jButton36);
+        jPanel15.add(btnKetThuc);
 
-        jLabel9.setText("Trạng Thái :Trống");
-        jPanel15.add(jLabel9);
+        lblTrangThai.setText("Trạng Thái :Trống");
+        jPanel15.add(lblTrangThai);
 
         jPanel5.add(jPanel15);
 
@@ -350,8 +367,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel11.setPreferredSize(new java.awt.Dimension(30, 14));
         jPanel14.add(jLabel11);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel14.add(jComboBox2);
+        cboLoaiDV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoaiDV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboLoaiDVItemStateChanged(evt);
+            }
+        });
+        jPanel14.add(cboLoaiDV);
 
         jPanel22.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -370,7 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel5.add(jPanel14);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -378,7 +400,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Tên mặt hàng", "Giá", "Đơn vị", "Số lượng"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblDichVu);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -679,13 +701,13 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton39ActionPerformed
 
-    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton34ActionPerformed
+    private void btnBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauActionPerformed
+        tbd.stop();
+    }//GEN-LAST:event_btnBatDauActionPerformed
 
-    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+    private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton36ActionPerformed
+    }//GEN-LAST:event_btnKetThucActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -723,6 +745,10 @@ public class MainFrame extends javax.swing.JFrame {
         JFrameThongKe frmTK = new JFrameThongKe();
         frmTK.setVisible(true);
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void cboLoaiDVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLoaiDVItemStateChanged
+        fillToTableDV();
+    }//GEN-LAST:event_cboLoaiDVItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -766,13 +792,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgnChucvu;
     private javax.swing.ButtonGroup bgnTTDV;
     private javax.swing.ButtonGroup bgnTrangthai;
+    private javax.swing.JButton btnBatDau;
     private javax.swing.JButton btnDichVu;
     private javax.swing.JButton btnGioiThieu;
+    private javax.swing.JButton btnKetThuc;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnManChinh;
     private javax.swing.JButton btnPhong;
     private javax.swing.JButton btnTaiKhoan;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JComboBox<String> cboLoaiDV;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -795,9 +824,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton38;
     private javax.swing.JButton jButton39;
@@ -807,17 +834,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -843,12 +865,104 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblNgay;
+    private javax.swing.JLabel lblTimeBD;
+    private javax.swing.JLabel lblTimeKT;
+    private javax.swing.JLabel lblTrangThai;
     private javax.swing.JPanel pnCardGoc;
     private javax.swing.JPanel pnCardManChinh;
+    private javax.swing.JTable tblDichVu;
     private javax.swing.JButton tnGhiChuNhanh;
     // End of variables declaration//GEN-END:variables
+
+    private void timeBD() {
+        tbd = new Thread() {
+            @Override
+            public void run() {
+                SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
+                while (true) {
+                    Date d = new Date();
+                    lblTimeBD.setText(date.format(d));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        break;
+                    }
+                }
+            }
+
+        };
+        tbd.start();
+    }
+
+    private void timKT() {
+        tkt = new Thread() {
+            @Override
+            public void run() {
+                SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
+                while (true) {
+                    Date d = new Date();
+                    lblTimeKT.setText(date.format(d));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        break;
+                    }
+                }
+            }
+
+        };
+        tkt.start();
+    }
+
+    private void dateNow() {
+        d = new Thread() {
+            @Override
+            public void run() {
+                SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+                while (true) {
+                    Date d = new Date();
+                    lblNgay.setText("Ngày: " + date.format(d));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        break;
+                    }
+                }
+            }
+
+        };
+        d.start();
+    }
+
+    private void fillComboDV() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiDV.getModel();
+        model.removeAllElements();
+        List<LoaiDichVu> list = ldvs.selectAll();
+        for (LoaiDichVu ldv : list) {
+            model.addElement(ldv);
+        }
+    }
+
+    private void fillToTableDV() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+        model.setRowCount(0);
+        try {
+            LoaiDichVu loaidichvu = (LoaiDichVu) cboLoaiDV.getSelectedItem();
+            List<DichVu> list = dvs.selectByLoaiDV(loaidichvu.getMaLDV());
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getTenDV(),
+                    dv.getGiaDV(),
+                    dv.getDonViTinh(),
+                    dv.getSoLuong()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }
 
 }
