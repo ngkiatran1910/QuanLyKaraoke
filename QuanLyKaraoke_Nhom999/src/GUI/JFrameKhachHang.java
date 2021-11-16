@@ -1,4 +1,3 @@
-
 package GUI;
 
 import Models.KhachHang;
@@ -8,19 +7,18 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class JFrameKhachHang extends javax.swing.JFrame {
 
-  int indext  =-1;
+    int indext = -1;
     Services.KhachHangService Service = new KhachHangService();
+
     public JFrameKhachHang() {
         initComponents();
-        indext  =0;
+        indext = 0;
         setLocationRelativeTo(null);
         fillTable();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,7 +44,8 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lý karaoke - Khách hàng");
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -300,8 +299,9 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    {
-         }if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
+        {
+        }
+        if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
             return;
         }
         if (validateUtilities.checkRong(txtTenKhachHang.getText(), "Tên khách hàng không được trống!")) {
@@ -313,14 +313,15 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
             return;
         }
-        
-    add();
+
+        add();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+
         {
-         }if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
+        }
+        if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
             return;
         }
         if (validateUtilities.checkRong(txtTenKhachHang.getText(), "Tên khách hàng không được trống!")) {
@@ -330,26 +331,26 @@ public class JFrameKhachHang extends javax.swing.JFrame {
             return;
         }
         String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
-         Boolean a;
-         if (a=txtSDT.getText().matches(reg)) {
-        }else{
+        Boolean a;
+        if (a = txtSDT.getText().matches(reg)) {
+        } else {
             JOptionPane.showMessageDialog(this, "Định dạng số điện thoại sai ?");
-            txtSDT.requestFocus(); 
+            txtSDT.requestFocus();
             return;
-         }
+        }
 //         if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
 //            return;
 //        }
-    update();
+        update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-    txtMaKH.setEditable(true);
-    clearForm();
+        txtMaKH.setEditable(true);
+        clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-     if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             indext = tblKhachHang.getSelectedRow();
             edit();
             txtMaKH.setEditable(false);
@@ -418,16 +419,17 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
-            List<KhachHang> list =Service.selectAll();
-            for(KhachHang kh : list) {
+            List<KhachHang> list = Service.selectAll();
+            for (KhachHang kh : list) {
                 model.addRow(new Object[]{
-                    kh.getMaKH(),kh.getTenKH(),kh.getSDT()
+                    kh.getMaKH(), kh.getTenKH(), kh.getSDT()
                 });
             }
         } catch (Exception e) {
-          
+
         }
     }
+
     KhachHang getForm() {
         KhachHang kh = new KhachHang();
         kh.setMaKH(txtMaKH.getText());
@@ -435,13 +437,15 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         kh.setSDT(txtSDT.getText());
         return kh;
     }
+
     private void setForm(KhachHang kh) {
         txtMaKH.setText(kh.getMaKH());
         txtTenKhachHang.setText(kh.getTenKH());
         txtSDT.setText(kh.getSDT());
     }
+
     private void add() {
-         KhachHang  kh = getForm();
+        KhachHang kh = getForm();
         try {
             Service.them(kh);
             fillTable();
@@ -454,7 +458,7 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }
 
     private void update() {
-        KhachHang  kh = getForm();
+        KhachHang kh = getForm();
         try {
             Service.sua(kh);
             fillTable();
@@ -473,10 +477,10 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }
 
     private void edit() {
-        
-        String makh =   (String) tblKhachHang.getValueAt(indext, 0);
+
+        String makh = (String) tblKhachHang.getValueAt(indext, 0);
         KhachHang kh = (KhachHang) Service.selectByID(makh);
         setForm(kh);
-        
+
     }
 }
