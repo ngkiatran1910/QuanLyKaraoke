@@ -3,6 +3,7 @@ package GUI;
 
 import Models.KhachHang;
 import Services.KhachHangService;
+import Utilities.validateUtilities;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -45,8 +46,7 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý karaoke - Khách hàng");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -300,21 +300,59 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    {
+         }if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtTenKhachHang.getText(), "Tên khách hàng không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtSDT.getText(), "Số điện thoại không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
+            return;
+        }
+        
     add();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        
+        {
+         }if (validateUtilities.checkRong(txtMaKH.getText(), "Mã khách hàng không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtTenKhachHang.getText(), "Tên khách hàng không được trống!")) {
+            return;
+        }
+        if (validateUtilities.checkRong(txtSDT.getText(), "Số điện thoại không được trống!")) {
+            return;
+        }
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+         Boolean a;
+         if (a=txtSDT.getText().matches(reg)) {
+        }else{
+            JOptionPane.showMessageDialog(this, "Định dạng số điện thoại sai ?");
+            txtSDT.requestFocus(); 
+            return;
+         }
+//         if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
+//            return;
+//        }
     update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-      clearForm();
+    txtMaKH.setEditable(true);
+    clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
      if (evt.getClickCount() == 2) {
             indext = tblKhachHang.getSelectedRow();
             edit();
+            txtMaKH.setEditable(false);
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
@@ -435,6 +473,7 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }
 
     private void edit() {
+        
         String makh =   (String) tblKhachHang.getValueAt(indext, 0);
         KhachHang kh = (KhachHang) Service.selectByID(makh);
         setForm(kh);

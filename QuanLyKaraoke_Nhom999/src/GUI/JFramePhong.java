@@ -4,6 +4,7 @@ import Models.LoaiPhong;
 import Models.Phong;
 import Services.LoaiPhongService;
 import Services.PhongService;
+import Utilities.validateUtilities;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -408,6 +409,7 @@ public class JFramePhong extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    
         add();
     }//GEN-LAST:event_btnThemActionPerformed
 
