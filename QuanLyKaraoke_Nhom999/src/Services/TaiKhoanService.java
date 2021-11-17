@@ -30,7 +30,9 @@ public class TaiKhoanService extends IServiceTaiKhoan<TaiKhoan, String> {
 
     @Override
     public TaiKhoan selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from TaiKhoan where MaNV = ?";
+        List<TaiKhoan> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     @Override
