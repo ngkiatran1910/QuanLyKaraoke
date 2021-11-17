@@ -63,5 +63,14 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
             throw new RuntimeException(e);
         }
     }
+    
+//    public List setLabel(){
+//        String sql = "Select CTHoaDon.MaP, Phong.MaLP,TenKH from HoaDon join KhachHang on HoaDon.MaKH = KhachHang.MaKH\n" +
+//"					join CTHoaDon on HoaDon.MaHD = CTHoaDon.MaHD\n" +
+//"					join Phong ON CTHoaDon.MaP = Phong.MaP\n" +
+//"					join LoaiPhong on Phong.MaLP = LoaiPhong.MaLP";
+//        return selectBySql(sql);
+//        
+//    }
 
 }

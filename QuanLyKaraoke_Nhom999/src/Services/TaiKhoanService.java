@@ -58,7 +58,14 @@ public class TaiKhoanService extends IServiceTaiKhoan<TaiKhoan, String> {
             throw  new RuntimeException(e);
         }
     }
-    
+    public void doiMK(TaiKhoan tk) {
+        String sql = "Update TaiKhoan\n"
+            + "Set MatKhau = ?\n"
+            + "Where MaNV = ?";
+        jdbcUtilities.update(sql,
+                tk.getMatKhau(),
+                tk.getMaNV());
+    }
 
 
 }
