@@ -6,10 +6,15 @@ import Services.DichVuService;
 import Services.LoaiDichVuService;
 import Services.PhongService;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -122,7 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnCardManChinh = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel7 = new javax.swing.JPanel();
+        pnlTang1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lblP101 = new javax.swing.JLabel();
         lblLoaiP101 = new javax.swing.JLabel();
@@ -925,8 +930,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel7.setBackground(new java.awt.Color(254, 204, 213));
-        jPanel7.setLayout(new java.awt.GridLayout(3, 3, 15, 15));
+        pnlTang1.setBackground(new java.awt.Color(254, 204, 213));
+        pnlTang1.setLayout(new java.awt.GridLayout(3, 3, 15, 15));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setComponentPopupMenu(jPopupMenu1);
@@ -969,7 +974,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel5);
+        pnlTang1.add(jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setComponentPopupMenu(jPopupMenu1);
@@ -1012,7 +1017,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel6);
+        pnlTang1.add(jPanel6);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setComponentPopupMenu(jPopupMenu1);
@@ -1055,7 +1060,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel10);
+        pnlTang1.add(jPanel10);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setComponentPopupMenu(jPopupMenu1);
@@ -1098,7 +1103,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel11);
+        pnlTang1.add(jPanel11);
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setComponentPopupMenu(jPopupMenu1);
@@ -1141,7 +1146,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel12);
+        pnlTang1.add(jPanel12);
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setComponentPopupMenu(jPopupMenu1);
@@ -1184,7 +1189,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel13);
+        pnlTang1.add(jPanel13);
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setComponentPopupMenu(jPopupMenu1);
@@ -1227,7 +1232,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel14);
+        pnlTang1.add(jPanel14);
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setComponentPopupMenu(jPopupMenu1);
@@ -1270,7 +1275,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel15);
+        pnlTang1.add(jPanel15);
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setComponentPopupMenu(jPopupMenu1);
@@ -1313,9 +1318,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.add(jPanel16);
+        pnlTang1.add(jPanel16);
 
-        jTabbedPane1.addTab("Tầng 1", jPanel7);
+        jTabbedPane1.addTab("Tầng 1", pnlTang1);
 
         jPanel8.setBackground(new java.awt.Color(254, 204, 213));
         jPanel8.setLayout(new java.awt.GridLayout(3, 3, 15, 15));
@@ -2684,7 +2689,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel46;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -2712,6 +2716,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuXemCT;
     private javax.swing.JPanel pnCardGoc;
     private javax.swing.JPanel pnCardManChinh;
+    private javax.swing.JPanel pnlTang1;
     private javax.swing.JTable tblDVHienDung;
     private javax.swing.JTable tblDichVuCS;
     private javax.swing.JTable tblHoaDonCT1;
@@ -2816,6 +2821,22 @@ public class MainFrame extends javax.swing.JFrame {
         jDialogTaoHD.setTitle("Quản lý Karaoke - Tạo hóa đơn");
         jDialogThemDV.setSize(870, 800);
         jDialogThemDV.setTitle("Quản lý Karaoke - Thêm dịch vụ");
+    }
+    JLabel lblp = new JLabel();
+    JPanel pn = new JPanel();
+
+    private void showPhong() {
+        try {
+            List<Phong> list = ps.selectAll();
+            for (Phong p : list) {
+                pn.setLayout(new GridLayout(3, 1));
+                pn.setBackground(Color.white);
+                pn.setComponentPopupMenu(jPopupMenu1);
+
+                pnlTang1.add(pn);
+            }
+        } catch (Exception e) {
+        }
     }
 
 }

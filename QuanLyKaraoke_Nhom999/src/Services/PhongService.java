@@ -63,7 +63,14 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
             throw new RuntimeException(e);
         }
     }
-    
+
+    public List selectTop5() {
+        String sql = "Select Top 5 Phong.MaP,Tang,MaLP,Phong.TrangThai,COUNT(Phong.MaP) AS SOLANSD From Phong join CTHoaDon on Phong.MaP = CTHoaDon.MaP\n"
+                + "GROUP BY Phong.MaP,Tang,MaLP,Phong.TrangThai\n"
+                + "ORDER BY COUNT(Phong.MaP) DESC";
+        return selectBySql(sql);
+    }
+
 //    public List setLabel(){
 //        String sql = "Select CTHoaDon.MaP, Phong.MaLP,TenKH from HoaDon join KhachHang on HoaDon.MaKH = KhachHang.MaKH\n" +
 //"					join CTHoaDon on HoaDon.MaHD = CTHoaDon.MaHD\n" +
@@ -72,5 +79,4 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
 //        return selectBySql(sql);
 //        
 //    }
-
 }

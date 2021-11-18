@@ -563,18 +563,20 @@ public class JFramePhong extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     private void fillTableTop5Phong() {
         DefaultTableModel model = (DefaultTableModel) tblTop5Phong.getModel();
         model.setRowCount(0);
         try {
-            List<Phong> list = ps.selectAll();
+            List<Phong> list = ps.selectTop5();
             for (Phong dv : list) {
                 Object[] row = {
+                    dv.getTang(),
                     dv.getMaP(),
                     dv.getMaLP(),
+                    dv.getSosd(),
                     dv.getTrangThai(),
-                    dv.getTang()};
+                    };
                 model.addRow(row);
             }
         } catch (Exception e) {

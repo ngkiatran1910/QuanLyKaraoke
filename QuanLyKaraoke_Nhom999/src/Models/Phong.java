@@ -4,8 +4,8 @@ package Models;
 
 public class Phong {
     public String MaP ,MaLP;
-    public int Tang,TrangThai;
-    public float TongGio;  
+    public int Tang,TrangThai,Sosd;
+    public float TongGio;
 
     public Phong() {
     }
@@ -58,9 +58,21 @@ public class Phong {
         this.TongGio = TongGio;
     }
 
+    public int getSosd() {
+        return Sosd;
+    }
+
+    public void setSosd(int Sosd) {
+        this.Sosd = Sosd;
+    }
+
     @Override
     public String toString() {
-        return "Phong{" + "MaP=" + MaP + ", MaLP=" + MaLP + ", Tang=" + Tang + ", TrangThai=" + TrangThai + ", TongGio=" + TongGio + '}';
+        return "Phong{" + "MaP=" + MaP + ", MaLP=" + MaLP + ", Tang=" + Tang + ", TrangThai=" + TrangThai + ", Sosd=" + Sosd + ", TongGio=" + TongGio + '}';
     }
+    
+   
+    
+    
     
 }
