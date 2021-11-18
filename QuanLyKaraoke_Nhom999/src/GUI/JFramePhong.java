@@ -32,6 +32,15 @@ public class JFramePhong extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        txtTenLoaiPhong1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtGiaTheoGio1 = new javax.swing.JTextField();
+        btnThemLoaiPhong1 = new javax.swing.JButton();
+        btnMoiLoaiPhong1 = new javax.swing.JButton();
+        btnThemLoaiPhong2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,6 +75,104 @@ public class JFramePhong extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTop5Phong = new javax.swing.JTable();
+
+        jPanel7.setBackground(new java.awt.Color(254, 204, 213));
+
+        txtTenLoaiPhong1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel10.setText("Tên loại phòng");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel11.setText("Giá theo giờ");
+
+        txtGiaTheoGio1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        btnThemLoaiPhong1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnThemLoaiPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
+        btnThemLoaiPhong1.setText("Thêm");
+        btnThemLoaiPhong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemLoaiPhong1ActionPerformed(evt);
+            }
+        });
+
+        btnMoiLoaiPhong1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnMoiLoaiPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Bubble.png"))); // NOI18N
+        btnMoiLoaiPhong1.setText("Mới");
+        btnMoiLoaiPhong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiLoaiPhong1ActionPerformed(evt);
+            }
+        });
+
+        btnThemLoaiPhong2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnThemLoaiPhong2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
+        btnThemLoaiPhong2.setText("Hủy");
+        btnThemLoaiPhong2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemLoaiPhong2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtTenLoaiPhong1))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnThemLoaiPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGiaTheoGio1)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(btnMoiLoaiPhong1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnThemLoaiPhong2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        jPanel7Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMoiLoaiPhong1, btnThemLoaiPhong1, btnThemLoaiPhong2});
+
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtTenLoaiPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtGiaTheoGio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMoiLoaiPhong1)
+                    .addComponent(btnThemLoaiPhong1)
+                    .addComponent(btnThemLoaiPhong2))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý karaoke - Phòng");
@@ -456,6 +563,18 @@ public class JFramePhong extends javax.swing.JFrame {
         clearLP();
     }//GEN-LAST:event_btnMoiLoaiPhongActionPerformed
 
+    private void btnThemLoaiPhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhong1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemLoaiPhong1ActionPerformed
+
+    private void btnMoiLoaiPhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiLoaiPhong1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoiLoaiPhong1ActionPerformed
+
+    private void btnThemLoaiPhong2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhong2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemLoaiPhong2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -495,11 +614,17 @@ public class JFramePhong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnMoiLoaiPhong;
+    private javax.swing.JButton btnMoiLoaiPhong1;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSuaLoaiPhong;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemLoaiPhong;
+    private javax.swing.JButton btnThemLoaiPhong1;
+    private javax.swing.JButton btnThemLoaiPhong2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -514,6 +639,7 @@ public class JFramePhong extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -521,11 +647,13 @@ public class JFramePhong extends javax.swing.JFrame {
     private javax.swing.JTable tblPhong;
     private javax.swing.JTable tblTop5Phong;
     private javax.swing.JTextField txtGiaTheoGio;
+    private javax.swing.JTextField txtGiaTheoGio1;
     private javax.swing.JTextField txtLoaiPhong;
     private javax.swing.JTextField txtMaLP;
     private javax.swing.JTextField txtSoPhong;
     private javax.swing.JTextField txtTang;
     private javax.swing.JTextField txtTenLoaiPhong;
+    private javax.swing.JTextField txtTenLoaiPhong1;
     private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 
