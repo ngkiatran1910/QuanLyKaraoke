@@ -68,8 +68,10 @@ public class Phong {
 
     @Override
     public String toString() {
-        return "Phong{" + "MaP=" + MaP + ", MaLP=" + MaLP + ", Tang=" + Tang + ", TrangThai=" + TrangThai + ", Sosd=" + Sosd + ", TongGio=" + TongGio + '}';
+        return "" + TrangThai;
     }
+
+    
     
    
     

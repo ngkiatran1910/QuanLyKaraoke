@@ -1,4 +1,3 @@
-
 package Services;
 
 import Models.LoaiPhong;
@@ -8,29 +7,26 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+public class LoaiPhongService extends IServices.IServiceLoaiPhong<LoaiPhong, String> {
 
-public class LoaiPhongService extends IServices.IServiceLoaiPhong<LoaiPhong, String>{
-
-    String THEM_SQL = "INSERT INTO LoaiPhong (MaLP, TenLoaiP, GiaTheoGio) VALUES (?,?,?)";
-    String SUA_SQL = "UPDATE LoaiPhong SET TenLoaiP=?, GiaTheoGio=? WHERE MaLP=?";
-    String SELECT_ID = "SELECT * FROM LoaiPhong Where MaLP = ?";
-    String SELECT_SQL = "SELECT * FROM LoaiPhong";
-    
     @Override
     public void them(LoaiPhong model) {
-        jdbcUtilities.update(THEM_SQL, model.getMaLP(),
+        String sql = "INSERT INTO LoaiPhong (TenLoaiP, GiaTheoGio) VALUES (?,?)";
+        jdbcUtilities.update(sql,
                 model.getTenLP(), model.getGiaTheoGio());
     }
 
     @Override
     public void sua(LoaiPhong model) {
-        jdbcUtilities.update(SUA_SQL, model.getTenLP(),
+        String sql = "UPDATE LoaiPhong SET TenLoaiP=?, GiaTheoGio=? WHERE MaLP=?";
+        jdbcUtilities.update(sql, model.getTenLP(),
                 model.getGiaTheoGio(), model.getMaLP());
     }
 
     @Override
     public LoaiPhong selectByID(String key) {
-        List<LoaiPhong> list = this.selectBySql(SELECT_ID, key);
+        String sql = "SELECT * FROM LoaiPhong Where MaLP = ?";
+        List<LoaiPhong> list = this.selectBySql(sql, key);
         if (list.isEmpty()) {
             return null;
         }
@@ -39,12 +35,13 @@ public class LoaiPhongService extends IServices.IServiceLoaiPhong<LoaiPhong, Str
 
     @Override
     public List<LoaiPhong> selectAll() {
-        return this.selectBySql(SELECT_SQL);
+        String sql = "SELECT * FROM LoaiPhong";
+        return this.selectBySql(sql);
     }
 
     @Override
     protected List<LoaiPhong> selectBySql(String sql, Object... args) {
-         List<LoaiPhong> list = new ArrayList<>();
+        List<LoaiPhong> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcUtilities.query(sql, args);
             while (rs.next()) {
@@ -60,5 +57,5 @@ public class LoaiPhongService extends IServices.IServiceLoaiPhong<LoaiPhong, Str
             throw new RuntimeException(e);
         }
     }
-    
+
 }

@@ -47,7 +47,7 @@ public class LoaiPhong {
 
     @Override
     public String toString() {
-        return "LoaiPhong{" + "MaLP=" + MaLP + ", TenLP=" + TenLP + ", GiaTheoGio=" + GiaTheoGio + '}';
+        return TenLP ;
     }
     
 }
