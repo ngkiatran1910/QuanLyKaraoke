@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Services;
 
 import Models.LoaiDichVu;
@@ -9,10 +6,7 @@ import Utilities.jdbcUtilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
-/**
- *
- * @author Admin
- */
+
 public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, String>{
 
     @Override
@@ -45,7 +39,9 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
 
     @Override
     public LoaiDichVu selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM LoaiDichVu WHERE MaLDV = ?";
+        List<LoaiDichVu> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     @Override

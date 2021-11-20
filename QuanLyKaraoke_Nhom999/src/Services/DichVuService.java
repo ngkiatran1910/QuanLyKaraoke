@@ -8,11 +8,18 @@ import java.sql.ResultSet;
 
 public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
 
-
     @Override
     public List selectAll() {
         String sql = "SELECT * FROM DichVu";
         return selectBySql(sql);
+    }
+
+    public List selectFillTable() {
+        String sql = "Select MaDV, TenDV, SoLuong, KieuDVT, GiaDV, TenLDV, TrangThai\n"
+                + "from LoaiDichVu join DichVu \n"
+                + "on LoaiDichVu.MaLDV=DichVu.MaLDV join DonViTinh\n"
+                + "on DichVu.MaDVT=DonViTinh.MaDVT";
+        return selectBySql_Table(sql);
     }
 
     public List selectTop5() {
@@ -64,9 +71,9 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
                 model.setTenDV(rs.getString("TenDV"));
                 model.setGiaDV(rs.getFloat("GiaDV"));
                 model.setSoLuong(rs.getInt("SoLuong"));
-                model.setDonViTinh(rs.getString("DonViTinh"));
                 model.setTrangThai(rs.getInt("TrangThai"));
                 model.setMaLDV(rs.getString("MaLDV"));
+                model.setDonViTinh(rs.getString("MaDVT"));
                 list.add(model);
             }
             rs.getStatement().getConnection().close();
@@ -76,7 +83,29 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         }
     }
     
-     public List<DichVu> selectByLoaiDV(String MaLDV) {
+    protected List<DichVu> selectBySql_Table(String sql, Object... args) {
+        List<DichVu> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                DichVu model = new DichVu();
+                model.setMaDV(rs.getString("MaDV"));
+                model.setTenDV(rs.getString("TenDV"));
+                model.setSoLuong(rs.getInt("SoLuong"));
+                model.setDonViTinh(rs.getString("KieuDVT"));
+                model.setGiaDV(rs.getFloat("GiaDV"));
+                model.setKieuLDV(rs.getString("TenLDV"));
+                model.setTrangThai(rs.getInt("TrangThai"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<DichVu> selectByLoaiDV(String MaLDV) {
         String sql = "SELECT * FROM DichVu WHERE MaLDV = ?";
         return this.selectBySql(sql, MaLDV);
     }

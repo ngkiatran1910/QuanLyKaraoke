@@ -421,6 +421,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
             }
         });
         tblDichVuTop5.setToolTipText("");
+        tblDichVuTop5.setRowHeight(30);
         jScrollPane1.setViewportView(tblDichVuTop5);
 
         tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
@@ -439,6 +440,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDichVu.setRowHeight(30);
         tblDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDichVuMouseClicked(evt);
@@ -673,7 +675,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
         model.setRowCount(0);
         try {
-            List<DichVu> list = dichVuDAO.selectAll();
+            List<DichVu> list = dichVuDAO.selectFillTable();
             for (DichVu dv : list) {
                 Object[] row = {
                     dv.getMaDV(),
@@ -681,7 +683,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
                     dv.getSoLuong(),
                     dv.getDonViTinh(),
                     dv.getGiaDV(),
-                    dv.getMaLDV(),
+                    dv.getKieuLDV(),
                     dv.getTrangThai()};
                 model.addRow(row);
             }
@@ -755,7 +757,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         dv.setMaDV(txtMaDV.getText());
         dv.setTenDV(txtTenDV.getText());
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-        dv.setMaLDV(cboLoaiDV.getItemAt(0).toString());
+        dv.setMaLDV((String) cboLoaiDV.getSelectedItem());
         dv.setDonViTinh(cboDonViTinh.getItemAt(0));
         dv.setGiaDV(Float.parseFloat(txtGia.getText()));
         dv.setTrangThai(Integer.parseInt(cboTrangThai.getItemAt(0)));
