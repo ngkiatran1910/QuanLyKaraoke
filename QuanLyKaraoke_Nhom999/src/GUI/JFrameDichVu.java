@@ -683,7 +683,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
                     dv.getSoLuong(),
                     dv.getDonViTinh(),
                     dv.getGiaDV(),
-                    dv.getKieuLDV(),
+                    dv.getMaLDV(),
                     dv.getTrangThai()};
                 model.addRow(row);
             }

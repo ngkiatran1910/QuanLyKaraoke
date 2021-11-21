@@ -2345,6 +2345,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnGioiThieu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGioiThieu.setMargin(new java.awt.Insets(2, 14, 2, 85));
         btnGioiThieu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGioiThieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGioiThieuActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnGioiThieu);
 
         btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -2366,6 +2371,11 @@ public class MainFrame extends javax.swing.JFrame {
         tnGhiChuNhanh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tnGhiChuNhanh.setMargin(new java.awt.Insets(2, 14, 2, 85));
         tnGhiChuNhanh.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tnGhiChuNhanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tnGhiChuNhanhActionPerformed(evt);
+            }
+        });
         jToolBar1.add(tnGhiChuNhanh);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -2460,6 +2470,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGioiThieuActionPerformed
+        // TODO add your handling code here:
+        JFrameGioiThieu jfrGT = new JFrameGioiThieu();
+        jfrGT.setVisible(true);
+    }//GEN-LAST:event_btnGioiThieuActionPerformed
+
+    private void tnGhiChuNhanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tnGhiChuNhanhActionPerformed
+        // TODO add your handling code here:
+        JFrameGhiChu jfrGhiChu = new JFrameGhiChu();
+        jfrGhiChu.setVisible(true);
+    }//GEN-LAST:event_tnGhiChuNhanhActionPerformed
 
     /**
      * @param args the command line arguments

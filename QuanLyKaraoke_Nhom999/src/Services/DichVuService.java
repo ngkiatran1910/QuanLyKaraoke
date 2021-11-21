@@ -94,7 +94,7 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
                 model.setSoLuong(rs.getInt("SoLuong"));
                 model.setDonViTinh(rs.getString("KieuDVT"));
                 model.setGiaDV(rs.getFloat("GiaDV"));
-                model.setKieuLDV(rs.getString("TenLDV"));
+                model.setMaLDV(rs.getString("TenLDV"));
                 model.setTrangThai(rs.getInt("TrangThai"));
                 list.add(model);
             }
