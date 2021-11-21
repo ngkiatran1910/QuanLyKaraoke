@@ -59,5 +59,12 @@ public class KhachHangService extends IServices.IServiceKhachHang<KhachHang, Str
             throw new RuntimeException(e);
         }
     }
+    public List<KhachHang> selectTop5() {
+        String sql = "Select Top 5 KhachHang.MaKH,KhachHang.TenKH,KhachHang.SDT,COUNT(HoaDon.MaKH)"
+                + " AS SOHD From KhachHang join HoaDon on KhachHang.MaKH = HoaDon.MaKH\n"
+                + "GROUP BY KhachHang.MaKH,KhachHang.TenKH,KhachHang.SDT\n"
+                + "ORDER BY COUNT(HoaDon.MaKH) DESC";
+        return selectBySql(sql);
+    }
 
 }

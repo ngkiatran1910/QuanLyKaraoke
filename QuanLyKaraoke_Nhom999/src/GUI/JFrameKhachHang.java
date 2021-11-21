@@ -17,6 +17,7 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         indext = 0;
         setLocationRelativeTo(null);
         fillTable();
+        fillTableTop5();
     }
 
     @SuppressWarnings("unchecked")
@@ -175,6 +176,11 @@ public class JFrameKhachHang extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblKhachHangTop5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhachHangTop5MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblKhachHangTop5);
@@ -351,9 +357,20 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         if (evt.getClickCount() == 1) {
             indext = tblKhachHang.getSelectedRow();
             edit();
-            txtMaKH.setEditable(false);
+
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
+
+    private void tblKhachHangTop5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangTop5MouseClicked
+        try {
+            if (evt.getClickCount() == 1) {
+            indext = tblKhachHangTop5.getSelectedRow();
+            edit();
+       
+        }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_tblKhachHangTop5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -480,5 +497,19 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         KhachHang kh = (KhachHang) Service.selectByID(makh);
         setForm(kh);
 
+    }
+     private void fillTableTop5() {
+        DefaultTableModel model = (DefaultTableModel) tblKhachHangTop5.getModel();
+        model.setRowCount(0);
+        try {
+            List<KhachHang> list = Service.selectTop5();
+            for (KhachHang kh : list) {
+                model.addRow(new Object[]{
+                    kh.getMaKH(), kh.getTenKH(), kh.getSDT()
+                });
+            }
+        } catch (Exception e) {
+
+        }
     }
 }
