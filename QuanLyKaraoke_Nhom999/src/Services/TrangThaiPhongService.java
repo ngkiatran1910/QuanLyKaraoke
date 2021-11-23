@@ -22,7 +22,12 @@ public class TrangThaiPhongService extends IServices.IServiceTrangThaiPhong<Tran
 
     @Override
     public TrangThaiPhong selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM TrangThaiPhong Where IDTTPhong = ?";
+        List<TrangThaiPhong> list = this.selectBySql(sql, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
@@ -39,7 +44,7 @@ public class TrangThaiPhongService extends IServices.IServiceTrangThaiPhong<Tran
             while (rs.next()) {
                 TrangThaiPhong model = new TrangThaiPhong();
                 model.setIdTTPhong(rs.getInt("IDTTPhong"));
-                model.setTenTTPhong(rs.getString("TenTrangThai"));                
+                model.setTenTTPhong(rs.getString("TenTrangThai"));
                 list.add(model);
             }
             rs.getStatement().getConnection().close();

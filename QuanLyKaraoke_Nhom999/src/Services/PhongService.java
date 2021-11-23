@@ -16,7 +16,7 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
 
     @Override
     public void them(Phong p) {
-        String sql = "INSERT INTO Phong (MaP, MaLP, TrangThai, Tang) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Phong (MaP, MaLP, IDTTPhong, Tang) VALUES (?,?,?,?)";
         jdbcUtilities.update(sql,
                 p.getMaP(),
                 p.getMaLP(),
@@ -26,7 +26,7 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
 
     @Override
     public void sua(Phong p) {
-        String sql = "UPDATE Phong SET MaLP=?, TrangThai=?, Tang=? WHERE MaP=?";
+        String sql = "UPDATE Phong SET MaLP=?, IDTTPhong=?, Tang=? WHERE MaP=?";
         jdbcUtilities.update(sql,
                 p.getMaLP(),
                 p.getTrangThai(),
@@ -65,8 +65,8 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
     }
 
     public List selectTop5() {
-        String sql = "Select Top 5 Phong.MaP,Tang,MaLP,Phong.TrangThai,COUNT(Phong.MaP) AS SOLANSD From Phong join CTHoaDon on Phong.MaP = CTHoaDon.MaP\n"
-                + "GROUP BY Phong.MaP,Tang,MaLP,Phong.TrangThai\n"
+        String sql = "Select Top 5 Phong.MaP,Tang,MaLP,Phong.IDTTPhong,COUNT(Phong.MaP) AS SOLANSD From Phong join CTHoaDon on Phong.MaP = CTHoaDon.MaP\n"
+                + "GROUP BY Phong.MaP,Tang,MaLP,Phong.IDTTPhong\n"
                 + "ORDER BY COUNT(Phong.MaP) DESC";
         return selectBySql(sql);
     }
