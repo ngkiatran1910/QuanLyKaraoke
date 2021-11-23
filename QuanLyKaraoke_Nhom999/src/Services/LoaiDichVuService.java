@@ -16,7 +16,7 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
             ResultSet rs = jdbcUtilities.query(sql, args);
             while (rs.next()) {
                 LoaiDichVu model = new LoaiDichVu();
-                model.setMaLDV(rs.getString("MaLDV"));
+                model.setMaLDV(rs.getInt("MaLDV"));
                 model.setTenLDV(rs.getString("TenLDV"));
                 list.add(model);
             }

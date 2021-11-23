@@ -9,8 +9,8 @@ package Models;
  * @author Admin
  */
 public class CTDichVu {
-    public String  MaP,MaDV,MaHD,TenDV;
-    public int SoLuong;
+    public String  MaP,MaDV,TenDV;
+    public int SoLuong,MaHD;
     public float DonGia;
 
     public String getMaP() {
@@ -29,11 +29,11 @@ public class CTDichVu {
         this.MaDV = MaDV;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return MaHD;
     }
 
-    public void setMaHD(String MaHD) {
+    public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
     }
 

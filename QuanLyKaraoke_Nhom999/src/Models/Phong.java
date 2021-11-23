@@ -71,10 +71,5 @@ public class Phong {
         return "" + TrangThai;
     }
 
-    
-    
-   
-    
-    
-    
+    public String kh = null;
 }

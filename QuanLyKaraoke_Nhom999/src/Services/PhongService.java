@@ -53,7 +53,7 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
                 Phong model = new Phong();
                 model.setMaP(rs.getString("MaP"));
                 model.setMaLP(rs.getString("MaLP"));
-                model.setTrangThai(rs.getInt("TrangThai"));
+                model.setTrangThai(rs.getInt("IDTTPhong"));
                 model.setTang(rs.getInt("Tang"));
                 list.add(model);
             }
@@ -71,12 +71,8 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
         return selectBySql(sql);
     }
 
-//    public List setLabel(){
-//        String sql = "Select CTHoaDon.MaP, Phong.MaLP,TenKH from HoaDon join KhachHang on HoaDon.MaKH = KhachHang.MaKH\n" +
-//"					join CTHoaDon on HoaDon.MaHD = CTHoaDon.MaHD\n" +
-//"					join Phong ON CTHoaDon.MaP = Phong.MaP\n" +
-//"					join LoaiPhong on Phong.MaLP = LoaiPhong.MaLP";
-//        return selectBySql(sql);
-//        
-//    }
+    public List<Phong> selectByTang(int tang) {
+        String sql = "Select * from Phong where Tang=?";
+        return selectBySql(sql, tang); 
+    }
 }

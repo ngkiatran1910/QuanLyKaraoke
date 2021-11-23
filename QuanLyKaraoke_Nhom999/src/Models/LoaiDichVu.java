@@ -10,21 +10,22 @@ package Models;
  */
 public class LoaiDichVu {
 
-    public String MaLDV, TenLDV;
+    public String TenLDV;
+    public int MaLDV;
 
     public LoaiDichVu() {
     }
 
-    public LoaiDichVu(String MaLDV, String TenLDV) {
+    public LoaiDichVu(int MaLDV, String TenLDV) {
         this.MaLDV = MaLDV;
         this.TenLDV = TenLDV;
     }
 
-    public String getMaLDV() {
+    public int getMaLDV() {
         return MaLDV;
     }
 
-    public void setMaLDV(String MaLDV) {
+    public void setMaLDV(int MaLDV) {
         this.MaLDV = MaLDV;
     }
 
