@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Models.LoaiDichVu;
 import Models.CTDichVu;
+import Models.ThanhToan;
+import Models.TrangThaiPhong;
+import Services.TrangThaiPhongService;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -27,6 +30,8 @@ public class MainFrame extends javax.swing.JFrame {
     Thread tbd, tkt, d;
     LoaiDichVuService ldvs = new LoaiDichVuService();
     DichVuService dvs = new DichVuService();
+    TrangThaiPhongService ttps = new TrangThaiPhongService();
+    
     ArrayList<CTHoaDonTam> list = new ArrayList();
 
     public MainFrame() {
@@ -160,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboHTTT = new javax.swing.JComboBox<>();
         jTextField4 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -1073,8 +1078,8 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel39.add(jTextField2);
         jPanel39.add(jTextField3);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel39.add(jComboBox1);
+        cboHTTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel39.add(cboHTTT);
         jPanel39.add(jTextField4);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1230,7 +1235,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(pnCardGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1440,10 +1445,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnTaiKhoan;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JComboBox<String> cboHTTT;
     private javax.swing.JComboBox<String> cboLoaiDV;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialogTaoHD;
     private javax.swing.JDialog jDialogThemDV;
@@ -1633,22 +1638,27 @@ public class MainFrame extends javax.swing.JFrame {
         FillDichVuCS();
         fillToComboDichVu();
         fillToTableDichVuHD();
+//        fillToComboHinhThucTT();
     }
 
     private void fillTable1() {
         DefaultTableModel model1 = (DefaultTableModel) tblTang1.getModel();
         model1.setRowCount(0);
-
         try {
-            List<Phong> lst1 = ps.selectByTang(1);
-            for (Phong p : lst1) {
-                Object[] row = {
-                    p.getMaP(),
-                    p.getMaLP(),
-                    p.kh = txtTenKHHD.getText(),
-                    p.getTrangThai()
-                };
-                model1.addRow(row);
+            List<LoaiPhong> lstLP = lps.selectAll();
+            for (LoaiPhong lp : lstLP) {
+                List<Phong> lst1 = ps.selectByTang(1);
+                for (Phong p : lst1) {
+                    if (lp.getMaLP().equals(p.getMaLP())) {
+                        Object[] row = {
+                            p.getMaP(),
+                            lp.getTenLP(),
+                            p.kh = txtTenKHHD.getText(),
+                            p.getTrangThai()
+                        };
+                        model1.addRow(row);
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1658,17 +1668,21 @@ public class MainFrame extends javax.swing.JFrame {
     private void fillTable2() {
         DefaultTableModel model1 = (DefaultTableModel) tblTang2.getModel();
         model1.setRowCount(0);
-
         try {
-            List<Phong> lst1 = ps.selectByTang(2);
-            for (Phong p : lst1) {
-                Object[] row = {
-                    p.getMaP(),
-                    p.getMaLP(),
-                    p.kh = txtTenKHHD.getText(),
-                    p.getTrangThai()
-                };
-                model1.addRow(row);
+            List<LoaiPhong> lstLP = lps.selectAll();
+            for (LoaiPhong lp : lstLP) {
+                List<Phong> lst1 = ps.selectByTang(2);
+                for (Phong p : lst1) {
+                    if (lp.getMaLP().equals(p.getMaLP())) {
+                        Object[] row = {
+                            p.getMaP(),
+                            lp.getTenLP(),
+                            p.kh = txtTenKHHD.getText(),
+                            p.getTrangThai()
+                        };
+                        model1.addRow(row);
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1678,17 +1692,21 @@ public class MainFrame extends javax.swing.JFrame {
     private void fillTable3() {
         DefaultTableModel model1 = (DefaultTableModel) tblTang3.getModel();
         model1.setRowCount(0);
-
         try {
-            List<Phong> lst1 = ps.selectByTang(3);
-            for (Phong p : lst1) {
-                Object[] row = {
-                    p.getMaP(),
-                    p.getMaLP(),
-                    p.kh = txtTenKHHD.getText(),
-                    p.getTrangThai()
-                };
-                model1.addRow(row);
+            List<LoaiPhong> lstLP = lps.selectAll();
+            for (LoaiPhong lp : lstLP) {
+                List<Phong> lst1 = ps.selectByTang(3);
+                for (Phong p : lst1) {
+                    if (lp.getMaLP().equals(p.getMaLP())) {
+                        Object[] row = {
+                            p.getMaP(),
+                            lp.getTenLP(),
+                            p.kh = txtTenKHHD.getText(),
+                            p.getTrangThai()
+                        };
+                        model1.addRow(row);
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1742,7 +1760,7 @@ public class MainFrame extends javax.swing.JFrame {
     void setModelTaoHD(Phong model) {
         lblAnTrom.setText(model.getMaP());
         lblPhongHD.setText("Phòng " + model.getMaP());
-        txtMaLPHD.setText(model.getMaLP());
+        txtMaLPHD.setText(model.getMaLP()+"");
         String malp = txtMaLPHD.getText();
         LoaiPhong lp = lps.selectByID(malp);
         txtTangHD.setText(model.getTang() + "");
@@ -1753,7 +1771,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     void setModelThemDV(Phong model) {
         lblPhongThemHD.setText("Phòng " + model.getMaP());
-        txtMaLPTDV.setText(model.getMaLP());
+        txtMaLPTDV.setText(model.getMaLP()+"");
         String malp = txtMaLPTDV.getText();
         LoaiPhong lp = lps.selectByID(malp);
         txtTangTDV.setText(model.getTang() + "");
@@ -1761,7 +1779,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtLoaiPhongTDV.setText(lp.getTenLP());
         txtGiaTheoGioTDV.setText(lp.getGiaTheoGio() + "");
     }
-    
+
     private void FillDichVuCS() {
         DefaultTableModel model1 = (DefaultTableModel) tblDichVuCS.getModel();
         model1.setRowCount(0);
@@ -1779,7 +1797,7 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     private void fillToComboDichVu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiDV.getModel();
         model.removeAllElements();
@@ -1788,7 +1806,7 @@ public class MainFrame extends javax.swing.JFrame {
             model.addElement(ldv);
         }
     }
-  
+
     private void fillToTableDichVu() {
         DefaultTableModel model_dv = (DefaultTableModel) tblLoaiDV.getModel();
         model_dv.setRowCount(0);
@@ -1808,12 +1826,13 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
+
     CTDichVuService ctdv = new CTDichVuService();
+
     private void fillToTableDichVuHD() {
         DefaultTableModel model_dv = (DefaultTableModel) tblDVHienDung.getModel();
         model_dv.setRowCount(0);
-        try {            
+        try {
             List<CTDichVu> listctdv = ctdv.selectAll();
             for (CTDichVu dv : listctdv) {
                 Object[] row = {
@@ -1827,4 +1846,15 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+
+//    private void fillToComboHinhThucTT() {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cboHTTT.getModel();
+//        model.removeAllElements();
+//        List<ThanhToan> listtt = loaiPhongDAO.selectAll();
+//        for (ThanhToan tt : listtt) {
+//            model.addElement(tt);
+//        }
+//    }
+    
+    
 }
