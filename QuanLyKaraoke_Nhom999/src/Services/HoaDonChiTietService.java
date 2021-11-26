@@ -20,7 +20,7 @@ public class HoaDonChiTietService extends IServiceHoaDonChiTiet<HoaDonChiTiet, S
         String sql = "update CTHoaDon\n"
                 + "set MaP = ?, MaTT = ?, MaDV = ?,TienGio =?, TienDV = ?, NgayXuatHD = ?,IDTTThanhToan = ?,NgayDat = ? ,GioBD = ?,GioKT = ?,TongGio = ?\n"
                 + "where MaHD = ?";
-        jdbcUtilities.update(sql, 
+        jdbcUtilities.update(sql,
                 model.getMaP(),
                 model.getMaTT(),
                 model.getMaDV(),
@@ -73,4 +73,10 @@ public class HoaDonChiTietService extends IServiceHoaDonChiTiet<HoaDonChiTiet, S
         }
     }
 
+    public void s(HoaDonChiTiet model) {
+        String sql = "update CTHoaDon\n"
+                + "set GioBD = ?\n"
+                + "where MaHD = ?";
+        jdbcUtilities.update(sql, model.getGioBD(), model.getMaHD());
+    }
 }
