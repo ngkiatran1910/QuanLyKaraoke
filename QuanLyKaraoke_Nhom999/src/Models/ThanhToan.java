@@ -75,16 +75,8 @@ public class ThanhToan {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ThanhToan{HinhThucTT=").append(HinhThucTT);
-        sb.append(", TienTT=").append(TienTT);
-        sb.append(", TienNhan=").append(TienNhan);
-        sb.append(", TienDu=").append(TienDu);
-        sb.append(", TrangThai=").append(TrangThai);
-        sb.append(", MaTT=").append(MaTT);
-        sb.append('}');
-        return sb.toString();
+    public String toString() {      
+        return HinhThucTT;
     }
 
 }
