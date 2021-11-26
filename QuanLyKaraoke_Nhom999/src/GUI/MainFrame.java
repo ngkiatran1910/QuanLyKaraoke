@@ -20,8 +20,10 @@ import javax.swing.table.DefaultTableModel;
 import Models.LoaiDichVu;
 import Models.CTDichVu;
 import Models.HoaDon;
+import Models.HoaDonChiTiet;
 import Models.ThanhToan;
 import Models.TrangThaiThanhToan;
+import Services.HoaDonChiTietService;
 import Services.ThanhToanService;
 import Services.TrangThaiPhongService;
 import Services.TrangThaiThanhToanService;
@@ -36,6 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
     TrangThaiPhongService ttps = new TrangThaiPhongService();
     ThanhToanService tts = new ThanhToanService();
     TrangThaiThanhToanService tttts = new TrangThaiThanhToanService();
+    HoaDonChiTietService hdcts = new HoaDonChiTietService();
     
     ArrayList<CTHoaDonTam> list = new ArrayList();
 
@@ -1400,12 +1403,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cboLoaiDVActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       if(txtTenKHHD.getText().equals("")){
-           JOptionPane.showMessageDialog(this, "Chưa nhập khách hàng!!!");
-           return;
-       }else{
-           taoHD();
-       }
+       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -1923,11 +1921,19 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void layTime() {
-        
-    }
-
-    private void taoHD() {
-        List<HoaDon> listHD = new ArrayList();
+        HoaDonChiTiet ct = new HoaDonChiTiet();
+//        ct.setMaHD(WIDTH);
+        ct.setMaP(lblAnTrom.getText());
+//        ct.setMaTT(WIDTH);
+//        ct.setMaDV((String) tblDichVuCS.getValueAt(index, 0));
+//        ct.setTienDV(TOP_ALIGNMENT);
+//        ct.setTienDV(TOP_ALIGNMENT);
+//        ct.setNgayXuatHD(NgayXuatHD);
+//        ct.setIDTTThanhToan(WIDTH);
+//        ct.setNgayDat(NgayDat);
+//        ct.setGioBD(lblTimeBD.getText());
+//        ct.setGioKT(lblTimeKT.getText());
+//        ct.setTongGio(TOP_ALIGNMENT);
         
     }
     

@@ -1,46 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Models;
 
-import java.time.LocalTime;
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
+
 public class HoaDonChiTiet {
 
-    public String MaHD, MaP, MaDV;
-    public Date NgayDat, NgayXuatHD;
-    public int TrangThai, MaTT;
-    public float TienGio, TienDV;
-    public LocalTime GioBD, GioKT;
+    public String MaP, MaDV;
+    public Date NgayDat, NgayXuatHD,GioBD, GioKT;
+    public int IDTTThanhToan,MaHD, MaTT;
+    public float TienGio, TienDV,TongGio;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String MaHD, String MaP, String MaDV, Date NgayDat, Date NgayXuatHD, int TrangThai, int MaTT, float TienGio, float TienDV, LocalTime GioBD, LocalTime GioKT) {
+    public HoaDonChiTiet(int MaHD, String MaP, String MaDV, Date NgayDat, Date NgayXuatHD, int IDTTThanhToan, int MaTT, float TienGio, float TienDV, float TongGio, Date GioBD, Date GioKT) {
         this.MaHD = MaHD;
         this.MaP = MaP;
         this.MaDV = MaDV;
         this.NgayDat = NgayDat;
         this.NgayXuatHD = NgayXuatHD;
-        this.TrangThai = TrangThai;
+        this.IDTTThanhToan = IDTTThanhToan;
         this.MaTT = MaTT;
         this.TienGio = TienGio;
         this.TienDV = TienDV;
+        this.TongGio = TongGio;
         this.GioBD = GioBD;
         this.GioKT = GioKT;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return MaHD;
     }
 
-    public void setMaHD(String MaHD) {
+    public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
     }
 
@@ -76,12 +69,12 @@ public class HoaDonChiTiet {
         this.NgayXuatHD = NgayXuatHD;
     }
 
-    public int getTrangThai() {
-        return TrangThai;
+    public int getIDTTThanhToan() {
+        return IDTTThanhToan;
     }
 
-    public void setTrangThai(int TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setIDTTThanhToan(int IDTTThanhToan) {
+        this.IDTTThanhToan = IDTTThanhToan;
     }
 
     public int getMaTT() {
@@ -108,38 +101,35 @@ public class HoaDonChiTiet {
         this.TienDV = TienDV;
     }
 
-    public LocalTime getGioBD() {
+    public float getTongGio() {
+        return TongGio;
+    }
+
+    public void setTongGio(float TongGio) {
+        this.TongGio = TongGio;
+    }
+
+    public Date getGioBD() {
         return GioBD;
     }
 
-    public void setGioBD(LocalTime GioBD) {
+    public void setGioBD(Date GioBD) {
         this.GioBD = GioBD;
     }
 
-    public LocalTime getGioKT() {
+    public Date getGioKT() {
         return GioKT;
     }
 
-    public void setGioKT(LocalTime GioKT) {
+    public void setGioKT(Date GioKT) {
         this.GioKT = GioKT;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("HoaDonChiTiet{MaHD=").append(MaHD);
-        sb.append(", MaP=").append(MaP);
-        sb.append(", MaDV=").append(MaDV);
-        sb.append(", NgayDat=").append(NgayDat);
-        sb.append(", NgayXuatHD=").append(NgayXuatHD);
-        sb.append(", TrangThai=").append(TrangThai);
-        sb.append(", MaTT=").append(MaTT);
-        sb.append(", TienGio=").append(TienGio);
-        sb.append(", TienDV=").append(TienDV);
-        sb.append(", GioBD=").append(GioBD);
-        sb.append(", GioKT=").append(GioKT);
-        sb.append('}');
-        return sb.toString();
+        return "HoaDonChiTiet{" + "MaHD=" + MaHD + ", MaP=" + MaP + ", MaDV=" + MaDV + ", NgayDat=" + NgayDat + ", NgayXuatHD=" + NgayXuatHD + ", IDTTThanhToan=" + IDTTThanhToan + ", MaTT=" + MaTT + ", TienGio=" + TienGio + ", TienDV=" + TienDV + ", TongGio=" + TongGio + ", GioBD=" + GioBD + ", GioKT=" + GioKT + '}';
     }
+
+    
 
 }
