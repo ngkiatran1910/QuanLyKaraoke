@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class dateUtilities {
-    public static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("HH-mm-ss");
+
+    public static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("hh:mm:ss");
 
     public static Date toDate(String date, String... pattern) {
         try {
@@ -20,6 +21,17 @@ public class dateUtilities {
             throw new RuntimeException(ex);
         }
     }
+
+    public static String toString(Date date, String... pattern) {
+        if (pattern.length > 0) {
+            DATE_FORMATER.applyPattern(pattern[0]);
+        }
+        if (date == null) {
+            date = dateUtilities.now();
+        }
+        return DATE_FORMATER.format(date);
+    }
+
     public static Date now() {
         return new Date();
     }

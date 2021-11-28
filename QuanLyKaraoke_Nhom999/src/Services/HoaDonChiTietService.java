@@ -73,10 +73,17 @@ public class HoaDonChiTietService extends IServiceHoaDonChiTiet<HoaDonChiTiet, S
         }
     }
 
-    public void s(HoaDonChiTiet model) {
+    public void update(HoaDonChiTiet model) {
         String sql = "update CTHoaDon\n"
                 + "set GioBD = ?\n"
-                + "where MaHD = ?";
-        jdbcUtilities.update(sql, model.getGioBD(), model.getMaHD());
+                + "where MaHD = ? and MaP=?";
+        jdbcUtilities.update(sql, model.getGioBD(), model.getMaHD(), model.getMaP());
+    }
+    
+    public void exitTime(HoaDonChiTiet model) {
+        String sql = "update CTHoaDon\n"
+                + "set GioKT = ?\n"
+                + "where MaHD = ? and MaP=?";
+        jdbcUtilities.update(sql, model.getGioBD(), model.getMaHD(), model.getMaP());
     }
 }
