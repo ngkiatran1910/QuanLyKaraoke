@@ -46,12 +46,10 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("KhachHang{MaKH=").append(MaKH);
-        sb.append(", TenKH=").append(TenKH);
-        sb.append(", SDT=").append(SDT);
-        sb.append('}');
-        return sb.toString();
+        return  TenKH ;
     }
+
+   
+    
     
 }

@@ -12,19 +12,19 @@ import java.util.Date;
  */
 public class HoaDon {
     public String MaHD,MaKH,MaNV;
-    public int SLPhongDat,TrangThai;
+    public int SLPhongDat,IDTTPhong;
     public float TongTien;
     public Date  NgayDat;
 
     public HoaDon() {
     }
 
-    public HoaDon(String MaHD, String MaKH, String MaNV, int SLPhongDat, int TrangThai, float TongTien, Date NgayDat) {
+    public HoaDon(String MaHD, String MaKH, String MaNV, int SLPhongDat, int IDTTPhong, float TongTien, Date NgayDat) {
         this.MaHD = MaHD;
         this.MaKH = MaKH;
         this.MaNV = MaNV;
         this.SLPhongDat = SLPhongDat;
-        this.TrangThai = TrangThai;
+        this.IDTTPhong = IDTTPhong;
         this.TongTien = TongTien;
         this.NgayDat = NgayDat;
     }
@@ -61,12 +61,12 @@ public class HoaDon {
         this.SLPhongDat = SLPhongDat;
     }
 
-    public int getTrangThai() {
-        return TrangThai;
+    public int getIDTTPhong() {
+        return IDTTPhong;
     }
 
-    public void setTrangThai(int TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setIDTTPhong(int IDTTPhong) {
+        this.IDTTPhong = IDTTPhong;
     }
 
     public float getTongTien() {
@@ -87,7 +87,10 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "MaHD=" + MaHD + ", MaKH=" + MaKH + ", MaNV=" + MaNV + ", SLPhongDat=" + SLPhongDat + ", TrangThai=" + TrangThai + ", TongTien=" + TongTien + ", NgayDat=" + NgayDat + '}';
+        return "HoaDon{" + "MaHD=" + MaHD + ", MaKH=" + MaKH + ", MaNV=" + MaNV + ", SLPhongDat=" + SLPhongDat + ", IDTTPhong=" + IDTTPhong + ", TongTien=" + TongTien + ", NgayDat=" + NgayDat + '}';
     }
+
+    
+    
     
 }

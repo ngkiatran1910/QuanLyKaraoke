@@ -40,7 +40,11 @@ public class KhachHangService extends IServices.IServiceKhachHang<KhachHang, Str
         List<KhachHang> list = selectBySql(sql, key);
         return list.size() > 0 ? list.get(0) : null;
     }
-
+    public KhachHang selectByTen(String key) {
+        String sql = "SELECT * FROM KhachHang WHERE TenKH = ?";
+        List<KhachHang> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
+    }
     @Override
     protected List<KhachHang> selectBySql(String sql, Object... args) {
         List<KhachHang> list = new ArrayList<>();
