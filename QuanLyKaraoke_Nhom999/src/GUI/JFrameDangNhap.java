@@ -3,6 +3,7 @@ package GUI;
 
 import Models.TaiKhoan;
 import Services.TaiKhoanService;
+import Utilities.UseUtilies;
 import javax.swing.JOptionPane;
 
 public class JFrameDangNhap extends javax.swing.JFrame {
@@ -34,7 +35,6 @@ public class JFrameDangNhap extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý Karaoke - Đăng nhập");
-        setPreferredSize(new java.awt.Dimension(605, 333));
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 
@@ -61,8 +61,14 @@ public class JFrameDangNhap extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setText("Đổi mật khẩu");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         txtMaNV.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtMaNV.setText("NV01");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -72,6 +78,8 @@ public class JFrameDangNhap extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        txtMatKhau.setText("12345678");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,7 +169,7 @@ public class JFrameDangNhap extends javax.swing.JFrame {
                     if (nhanVien != null) {    
                         String matKhau2 = nhanVien.getMatKhau();
                         if (matKhau.equals(matKhau2)) {  
-//                            shareHelper.USER = nhanVien;
+                            UseUtilies.USER = nhanVien;
                             new MainFrame().setVisible(true);
                             this.dispose();
                         } else {
@@ -178,6 +186,11 @@ public class JFrameDangNhap extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    new JFrameDoiMatKhau().setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments

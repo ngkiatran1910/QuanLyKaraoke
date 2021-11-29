@@ -23,6 +23,7 @@ import Models.HoaDon;
 import Models.HoaDonChiTiet;
 import Models.KhachHang;
 import Models.ThanhToan;
+import Models.TrangThaiPhong;
 import Models.TrangThaiThanhToan;
 import Services.HoaDonChiTietService;
 import Services.HoaDonService;
@@ -30,6 +31,7 @@ import Services.KhachHangService;
 import Services.ThanhToanService;
 import Services.TrangThaiPhongService;
 import Services.TrangThaiThanhToanService;
+import Utilities.UseUtilies;
 import Utilities.dateUtilities;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -150,7 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnCardGoc = new javax.swing.JPanel();
         pnCardManChinh = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabTang = new javax.swing.JTabbedPane();
         pnlTang1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblTang1 = new javax.swing.JTable();
@@ -901,7 +903,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(254, 204, 213));
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        tabTang.setBackground(new java.awt.Color(255, 255, 255));
 
         pnlTang1.setBackground(new java.awt.Color(254, 204, 213));
         pnlTang1.setLayout(new java.awt.GridLayout(1, 1, 15, 15));
@@ -932,7 +934,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlTang1.add(jScrollPane6);
 
-        jTabbedPane1.addTab("Tầng 1", pnlTang1);
+        tabTang.addTab("Tầng 1", pnlTang1);
 
         jPanel8.setBackground(new java.awt.Color(254, 204, 213));
         jPanel8.setLayout(new java.awt.GridLayout(1, 1, 15, 15));
@@ -963,7 +965,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel8.add(jScrollPane7);
 
-        jTabbedPane1.addTab("Tầng 2", jPanel8);
+        tabTang.addTab("Tầng 2", jPanel8);
 
         jPanel9.setBackground(new java.awt.Color(254, 204, 213));
         jPanel9.setLayout(new java.awt.GridLayout(1, 1, 15, 15));
@@ -994,17 +996,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane8);
 
-        jTabbedPane1.addTab("Tầng 3", jPanel9);
+        tabTang.addTab("Tầng 3", jPanel9);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabTang)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+            .addComponent(tabTang, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
         );
 
         pnCardManChinh.add(jPanel4);
@@ -1299,7 +1301,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnCardGoc, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(pnCardGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1375,6 +1377,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void mnuTaoDHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTaoDHActionPerformed
         jDialogTaoHD.show();
+        fillComBoxKhachHang();
     }//GEN-LAST:event_mnuTaoDHActionPerformed
 
     private void mnuThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuThemDVActionPerformed
@@ -1430,7 +1433,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cboLoaiDVActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
-    TaoHoaDon();
+        if (tabTang.getSelectedIndex()==0) {
+            TaoHoaDon();
+        }else if(tabTang.getSelectedIndex()==1){
+            TaoHoaDon2();
+        }else if(tabTang.getSelectedIndex()==2){
+            TaoHoaDon3();
+        }
+        
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     /**
@@ -1586,7 +1596,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblMapp;
     private javax.swing.JLabel lblNgay;
@@ -1601,6 +1610,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnCardGoc;
     private javax.swing.JPanel pnCardManChinh;
     private javax.swing.JPanel pnlTang1;
+    private javax.swing.JTabbedPane tabTang;
     private javax.swing.JTable tblDVHienDung;
     private javax.swing.JTable tblDichVuCS;
     private javax.swing.JTable tblHoaDonCT1;
@@ -1696,6 +1706,8 @@ public class MainFrame extends javax.swing.JFrame {
     PhongService ps = new PhongService();
 
     private void init() {
+        /// new JFrameDangNhap().setVisible(true);
+
         mnuXemCT.setText("Xem chi tiết");
         mnuTaoDH.setText("Tạo hóa đơn");
         mnuThemDV.setText("Thêm dịch vụ");
@@ -1714,7 +1726,8 @@ public class MainFrame extends javax.swing.JFrame {
         fillToComboHinhThucTT();
         fillToComboTrangThaiHD();
         showDT();
-        fillComBoxKhachHang();
+//      fillComBoxKhachHang();
+        System.out.println(UseUtilies.USER.getMaNV());
     }
 
     private void fillTable1() {
@@ -1729,7 +1742,8 @@ public class MainFrame extends javax.swing.JFrame {
                         Object[] row = {
                             p.getMaP(),
                             lp.getTenLP(),
-                             p.kh = (String) cboKhachHang.getSelectedItem(),
+//                            p.kh = (String) cboKhachHang.getSelectedItem(),
+                            p.kh =  null,
                             p.getTrangThai()
                         };
                         model1.addRow(row);
@@ -1753,7 +1767,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Object[] row = {
                             p.getMaP(),
                             lp.getTenLP(),
-                             p.kh = (String) cboKhachHang.getSelectedItem(),
+                            p.kh = (String) cboKhachHang.getSelectedItem(),
                             p.getTrangThai()
                         };
                         model1.addRow(row);
@@ -1976,31 +1990,94 @@ public class MainFrame extends javax.swing.JFrame {
 //        ct.getGioKT();
 //        ct.setTongGio(ct.getGioKT()-ct.getGioBD());
     }
-    private void TaoHoaDon() {
-        HoaDon hd = getFormHoaDon();
-        Services.HoaDonService hds = new HoaDonService();
-            try {
-            hds.them(hd);
-            JOptionPane.showMessageDialog(this, "Thêm thành công: ");
+
+    private void updateTrangThai() {
+        Phong model = getForm();
+        try {
+            ps.sua(model);
+            JOptionPane.showMessageDialog(this, "Trang awn cut");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    Phong getForm() {
+        Phong p = new Phong();
+        p.setMaLP(txtMaLPHD.getText());
+        p.setTrangThai(2);
+        p.setTang(Integer.parseInt(txtTangHD.getText()));
+        p.setMaP(lblMapp.getText());
+        return p;
+    }
     
+    private void TaoHoaDon() {
+        HoaDon hd = getFormHoaDon();
+
+        Services.HoaDonService hds = new HoaDonService();
+
+        int indext = tblTang1.getSelectedRow();
+        try {
+            hds.them(hd);
+            updateTrangThai();
+            JOptionPane.showMessageDialog(this, "Thêm thành công: ");
+            tblTang1.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang1.setValueAt("2", indext, 3);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    private void TaoHoaDon2() {
+        HoaDon hd = getFormHoaDon();
+
+        Services.HoaDonService hds = new HoaDonService();
+
+        int indext = tblTang2.getSelectedRow();
+        try {
+            hds.them(hd);
+            updateTrangThai();
+            JOptionPane.showMessageDialog(this, "Thêm thành công: ");
+            tblTang2.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang2.setValueAt("2", indext, 3);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    private void TaoHoaDon3() {
+        HoaDon hd = getFormHoaDon();
+
+        Services.HoaDonService hds = new HoaDonService();
+
+        int indext = tblTang3.getSelectedRow();
+        try {
+            hds.them(hd);
+            updateTrangThai();
+            JOptionPane.showMessageDialog(this, "Thêm thành công: ");
+            tblTang3.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang3.setValueAt("2", indext, 3);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     HoaDon getFormHoaDon() {
         HoaDon hd = new HoaDon();
-        KhachHangService  khs  = new KhachHangService();
-        KhachHang kh= (KhachHang) cboKhachHang.getSelectedItem();
-        KhachHang kh1  = khs.selectByTen(kh.getTenKH());
+        KhachHangService khs = new KhachHangService();
+        KhachHang kh = (KhachHang) cboKhachHang.getSelectedItem();
+        KhachHang kh1 = khs.selectByTen(kh.getTenKH());
         hd.setMaKH(kh1.getMaKH());
         Date d = new Date();
         hd.setNgayDat(convertJavaUtilDateToSqlDate(d));
         hd.setSLPhongDat(1);
         hd.setIDTTPhong(2);
-        hd.setMaNV("NV01");
+
+        hd.setMaNV(UseUtilies.USER.getMaNV());
+
         return hd;
     }
-     public  java.sql.Date convertJavaUtilDateToSqlDate(java.util.Date date) {
+
+    public java.sql.Date convertJavaUtilDateToSqlDate(java.util.Date date) {
         return new java.sql.Date(date.getTime());
     }
 
@@ -2008,7 +2085,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         DefaultComboBoxModel cbmodel = (DefaultComboBoxModel) cboKhachHang.getModel();
         cbmodel.removeAllElements();
-         KhachHangService  khs  = new KhachHangService();
+        KhachHangService khs = new KhachHangService();
         List<KhachHang> lkh = khs.selectAll();
         for (KhachHang khachHang : lkh) {
             cbmodel.addElement(khachHang);

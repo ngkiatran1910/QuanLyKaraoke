@@ -60,8 +60,9 @@ public class TaiKhoan {
 
     @Override
     public String toString() {
-        return "TaiKhoan{" + "MaNV=" + MaNV + ", TenNV=" + TenNV + ", MatKhau=" + MatKhau + ", ChucVu=" + ChucVu + ", TrangThai=" + TrangThai + '}';
+        return  MaNV ;
     }
+
     
     public String trangThai(int tt) {
         if(tt==0) {
