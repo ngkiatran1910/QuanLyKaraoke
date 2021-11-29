@@ -45,12 +45,12 @@ public class JFramePhong extends javax.swing.JFrame {
         txtGiaTheoGio1 = new javax.swing.JTextField();
         btnThemLoaiPhong1 = new javax.swing.JButton();
         btnMoiLoaiPhong1 = new javax.swing.JButton();
-        btnThemLoaiPhong2 = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
         jDialogThemTT = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtThemTT = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnThemTrangThai = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -107,12 +107,12 @@ public class JFramePhong extends javax.swing.JFrame {
             }
         });
 
-        btnThemLoaiPhong2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btnThemLoaiPhong2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
-        btnThemLoaiPhong2.setText("Hủy");
-        btnThemLoaiPhong2.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
+        btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemLoaiPhong2ActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
 
@@ -139,11 +139,11 @@ public class JFramePhong extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(btnMoiLoaiPhong1)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnThemLoaiPhong2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        jPanel7Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMoiLoaiPhong1, btnThemLoaiPhong1, btnThemLoaiPhong2});
+        jPanel7Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHuy, btnMoiLoaiPhong1, btnThemLoaiPhong1});
 
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +160,7 @@ public class JFramePhong extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoiLoaiPhong1)
                     .addComponent(btnThemLoaiPhong1)
-                    .addComponent(btnThemLoaiPhong2))
+                    .addComponent(btnHuy))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -182,13 +182,13 @@ public class JFramePhong extends javax.swing.JFrame {
 
         txtThemTT.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
-        jButton3.setText("Thêm");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnThemTrangThai.setBackground(new java.awt.Color(255, 255, 255));
+        btnThemTrangThai.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnThemTrangThai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
+        btnThemTrangThai.setText("Thêm");
+        btnThemTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnThemTrangThaiActionPerformed(evt);
             }
         });
 
@@ -220,7 +220,7 @@ public class JFramePhong extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnThemTrangThai)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)
                         .addGap(24, 24, 24)
@@ -232,7 +232,7 @@ public class JFramePhong extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton3, jButton4, jButton5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnThemTrangThai, jButton4, jButton5});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +243,7 @@ public class JFramePhong extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnThemTrangThai)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -532,7 +532,8 @@ public class JFramePhong extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        Utilities.validateUtilities.checkRong(txtTang.getText(), "Tầng không được để trống !");
+        Utilities.validateUtilities.checkRong(txtSoPhong.getText(), "Số phòng không được để trống !");
         add();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -541,10 +542,14 @@ public class JFramePhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        Utilities.validateUtilities.checkRong(txtTang.getText(), "Tầng không được để trống !");
+        Utilities.validateUtilities.checkRong(txtSoPhong.getText(), "Số phòng không được để trống !");
         ud();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemLoaiPhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhong1ActionPerformed
+        Utilities.validateUtilities.checkRong(txtTenLoaiPhong1.getText(), "Tên loại phòng không được để trống !");
+        Utilities.validateUtilities.checkRong(txtGiaTheoGio1.getText(), "Giá theo giờ không được để trống !");
         themLoaiPhong();
     }//GEN-LAST:event_btnThemLoaiPhong1ActionPerformed
 
@@ -553,9 +558,9 @@ public class JFramePhong extends javax.swing.JFrame {
         txtGiaTheoGio1.setText("");
     }//GEN-LAST:event_btnMoiLoaiPhong1ActionPerformed
 
-    private void btnThemLoaiPhong2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiPhong2ActionPerformed
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         jDialogThemLP.dispose();
-    }//GEN-LAST:event_btnThemLoaiPhong2ActionPerformed
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jDialogThemLP.show();
@@ -578,9 +583,10 @@ public class JFramePhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        addTrangThai();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnThemTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTrangThaiActionPerformed
+    Utilities.validateUtilities.checkRong(txtThemTT.getText(), "Trạng thái không được để trống !");
+    addTrangThai();
+    }//GEN-LAST:event_btnThemTrangThaiActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jDialogThemTT.dispose();
@@ -632,17 +638,17 @@ public class JFramePhong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnMoiLoaiPhong1;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemLoaiPhong1;
-    private javax.swing.JButton btnThemLoaiPhong2;
+    private javax.swing.JButton btnThemTrangThai;
     private javax.swing.JComboBox<String> cboLoaiP;
     private javax.swing.JComboBox<String> cboTrangthai;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JDialog jDialogThemLP;

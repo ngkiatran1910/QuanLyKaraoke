@@ -1,8 +1,10 @@
 package GUI;
-
+import java.sql.Connection;
 import Models.KhachHang;
 import Services.KhachHangService;
 import Utilities.validateUtilities;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -458,10 +460,26 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         txtTenKhachHang.setText(kh.getTenKH());
         txtSDT.setText(kh.getSDT());
     }
-
+    private void checkTrung(){
+//         try {
+//            String sql = "Select MASV From STUDENTS Where MASV = ?";
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setString(1, txtMaSV.getText());
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                JOptionPane.showMessageDialog(this, "Mã bị trùng!");
+//                return;
+//            }
+//            ps.close();
+//            rs.close();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+    }
     private void add() {
         KhachHang kh = getForm();
         try {
+            
             Service.them(kh);
             fillTable();
             clearForm();

@@ -1433,6 +1433,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cboLoaiDVActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
+        
+        
         if (tabTang.getSelectedIndex()==0) {
             TaoHoaDon();
         }else if(tabTang.getSelectedIndex()==1){

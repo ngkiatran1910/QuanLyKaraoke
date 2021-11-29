@@ -561,7 +561,11 @@ public class JFrameDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDichVuMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        themDV();
+    Utilities.validateUtilities.checkRong(txtMaDV.getText(), "Không được để trống mã dịch vụ !");
+    Utilities.validateUtilities.checkRong(txtTenDV.getText(), "Không được để trống tên dịch vụ !");
+    Utilities.validateUtilities.checkRong(txtSoLuong.getText(), "Không được để trống số lượng !");
+    Utilities.validateUtilities.checkRong(txtGia.getText(), "Không được để trống giá !");
+    themDV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnLDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLDVActionPerformed
@@ -573,6 +577,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemLDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLDVActionPerformed
+    Utilities.validateUtilities.checkRong(txtTenLDV.getText(), "Không được để trống tên loại dịch vụ !");
         themLDV();
     }//GEN-LAST:event_btnThemLDVActionPerformed
 
@@ -581,6 +586,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDonViTinhActionPerformed
 
     private void btnThemDTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDTVActionPerformed
+        Utilities.validateUtilities.checkRong(txtTenLDV.getText(), "Không được để trống tên đơn vị tính !");
         themDVT();
     }//GEN-LAST:event_btnThemDTVActionPerformed
 
@@ -757,7 +763,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         dv.setMaDV(txtMaDV.getText());
         dv.setTenDV(txtTenDV.getText());
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-        dv.setMaLDV((String) cboLoaiDV.getSelectedItem());
+        //dv.setMaLDV((String) cboLoaiDV.getSelectedItem());
         dv.setDonViTinh(cboDonViTinh.getItemAt(0));
         dv.setGiaDV(Float.parseFloat(txtGia.getText()));
         dv.setTrangThai(Integer.parseInt(cboTrangThai.getItemAt(0)));
