@@ -15,10 +15,8 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
     }
 
     public List selectFillTable() {
-        String sql = "Select MaDV, TenDV, SoLuong, KieuDVT, GiaDV, TenLDV, IDTTDichVu\n"
-                + "from LoaiDichVu join DichVu \n"
-                + "on LoaiDichVu.MaLDV=DichVu.MaLDV join DonViTinh\n"
-                + "on DichVu.MaDVT=DonViTinh.MaDVT";
+        String sql = "Select MaDV, TenDV, SoLuong, DonViTinh.MaDVT, GiaDV, LoaiDichVu.MaLDV, IDTTDichVu\n"
+                + "from LoaiDichVu join DichVu on LoaiDichVu.MaLDV=DichVu.MaLDV join DonViTinh on DichVu.MaDVT=DonViTinh.MaDVT";
         return selectBySql_Table(sql);
     }
 
@@ -29,27 +27,28 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
 
     @Override
     public void them(DichVu model) {
-        String sql = "INSERT INTO DichVu (MaDV,TenDV,GiaDV,SoLuong,DonViTinh,IDTTDichVu,MaLDV) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO DichVu (MaDV,TenDV,GiaDV,SoLuong,IDTTDichVu,MaLDV,MaDVT) VALUES (?,?,?,?,?,?,?)";
         jdbcUtilities.update(sql,
                 model.getMaDV(),
                 model.getTenDV(),
                 model.getGiaDV(),
                 model.getSoLuong(),
-                model.getDonViTinh(),
                 model.getTrangThai(),
-                model.getMaLDV());
+                model.getMaLDV(),
+                model.getDonViTinh()
+                );
     }
 
     @Override
     public void sua(DichVu model) {
-        String sql = "UPDATE DichVu SET TenDV=?,GiaDV=?,SoLuong=?,DonViTinh=?,IDTTDichVu=?,MaLDV=? WHERE MaDV=?";
+        String sql = "UPDATE DichVu SET TenDV=?,GiaDV=?,SoLuong=?,IDTTDichVu=?,MaLDV=?,MaDVT=? WHERE MaDV=?";
         jdbcUtilities.update(sql,
                 model.getTenDV(),
                 model.getGiaDV(),
                 model.getSoLuong(),
-                model.getDonViTinh(),
                 model.getTrangThai(),
                 model.getMaLDV(),
+                model.getDonViTinh(),
                 model.getMaDV());
     }
 
@@ -73,7 +72,7 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
                 model.setSoLuong(rs.getInt("SoLuong"));
                 model.setTrangThai(rs.getInt("IDTTDichVu"));
                 model.setMaLDV(rs.getInt("MaLDV"));
-                model.setDonViTinh(rs.getString("MaDVT"));
+                model.setDonViTinh(rs.getInt("MaDVT"));
                 list.add(model);
             }
             rs.getStatement().getConnection().close();
@@ -82,7 +81,7 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
             throw new RuntimeException(e);
         }
     }
-    
+
     protected List<DichVu> selectBySql_Table(String sql, Object... args) {
         List<DichVu> list = new ArrayList<>();
         try {
@@ -91,11 +90,11 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
                 DichVu model = new DichVu();
                 model.setMaDV(rs.getString("MaDV"));
                 model.setTenDV(rs.getString("TenDV"));
-                model.setSoLuong(rs.getInt("SoLuong"));
-                model.setDonViTinh(rs.getString("KieuDVT"));
                 model.setGiaDV(rs.getFloat("GiaDV"));
-                model.setMaLDV(rs.getInt("MaLDV"));
+                model.setSoLuong(rs.getInt("SoLuong"));
                 model.setTrangThai(rs.getInt("IDTTDichVu"));
+                model.setMaLDV(rs.getInt("MaLDV"));
+                model.setDonViTinh(rs.getInt("MaDVT"));
                 list.add(model);
             }
             rs.getStatement().getConnection().close();
@@ -114,6 +113,7 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         String sql = "Select MaDV,TenDV,SoLuong from DichVu";
         return selectBySql1(sql);
     }
+
     protected List<DichVu> selectBySql1(String sql, Object... args) {
         List<DichVu> list = new ArrayList<>();
         try {
@@ -130,5 +130,5 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }    
+    }
 }

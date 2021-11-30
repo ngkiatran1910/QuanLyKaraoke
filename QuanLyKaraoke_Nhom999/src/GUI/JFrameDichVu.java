@@ -3,9 +3,11 @@ package GUI;
 import Models.DichVu;
 import Models.DonViTinh;
 import Models.LoaiDichVu;
+import Models.TrangThaiDichVu;
 import Services.DichVuService;
 import Services.DonViTinhService;
 import Services.LoaiDichVuService;
+import Services.TrangThaiDichVuService;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -17,13 +19,14 @@ public class JFrameDichVu extends javax.swing.JFrame {
     LoaiDichVuService loaiDVDAO = new LoaiDichVuService();
     DichVuService dichVuDAO = new DichVuService();
     DonViTinhService donViTinhDAO = new DonViTinhService();
-
+    TrangThaiDichVuService trangthaiDVDAO = new TrangThaiDichVuService();
     public JFrameDichVu() {
         initComponents();
         setLocationRelativeTo(null);
         fillComboLoaiDV();
         fillToTableDV();
         fillComboDonVT();
+        fillComboTrangThai();
         diaThemLDV.setLocationRelativeTo(null);
         diaDonViTinh.setLocationRelativeTo(null);
     }
@@ -92,6 +95,11 @@ public class JFrameDichVu extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(153, 204, 255));
 
         btnMoiLDV.setText("Mới");
+        btnMoiLDV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiLDVActionPerformed(evt);
+            }
+        });
 
         btnHuy.setText("Hủy");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +108,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
             }
         });
 
-        lblTenDV.setText("Tên dịch vụ:");
+        lblTenDV.setText("Loại dịch vụ:");
 
         btnThemLDV.setText("Thêm");
         btnThemLDV.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +133,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(lblTenDV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(txtTenLDV, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -544,28 +552,28 @@ public class JFrameDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGiaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        // TODO add your handling code here:
+       clear();
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void tblDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMouseClicked
         if (evt.getClickCount() == 1) {
             this.index = tblDichVu.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
-                showDTDV();
+                edit();
             }
         }
     }//GEN-LAST:event_tblDichVuMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    Utilities.validateUtilities.checkRong(txtMaDV.getText(), "Không được để trống mã dịch vụ !");
-    Utilities.validateUtilities.checkRong(txtTenDV.getText(), "Không được để trống tên dịch vụ !");
-    Utilities.validateUtilities.checkRong(txtSoLuong.getText(), "Không được để trống số lượng !");
-    Utilities.validateUtilities.checkRong(txtGia.getText(), "Không được để trống giá !");
-    themDV();
+        Utilities.validateUtilities.checkRong(txtMaDV.getText(), "Không được để trống mã dịch vụ !");
+        Utilities.validateUtilities.checkRong(txtTenDV.getText(), "Không được để trống tên dịch vụ !");
+        Utilities.validateUtilities.checkRong(txtSoLuong.getText(), "Không được để trống số lượng !");
+        Utilities.validateUtilities.checkRong(txtGia.getText(), "Không được để trống giá !");
+        themDV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnLDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLDVActionPerformed
@@ -577,7 +585,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemLDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLDVActionPerformed
-    Utilities.validateUtilities.checkRong(txtTenLDV.getText(), "Không được để trống tên loại dịch vụ !");
+        Utilities.validateUtilities.checkRong(txtTenLDV.getText(), "Không được để trống tên loại dịch vụ !");
         themLDV();
     }//GEN-LAST:event_btnThemLDVActionPerformed
 
@@ -593,6 +601,10 @@ public class JFrameDichVu extends javax.swing.JFrame {
     private void btnHuyDVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDVTActionPerformed
         diaDonViTinh.dispose();
     }//GEN-LAST:event_btnHuyDVTActionPerformed
+
+    private void btnMoiLDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiLDVActionPerformed
+        txtTenLDV.setText("");
+    }//GEN-LAST:event_btnMoiLDVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -698,25 +710,36 @@ public class JFrameDichVu extends javax.swing.JFrame {
         }
 
     }
-
-    private void showDTDV() {
+    private void fillToTableDVTOP5() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+        model.setRowCount(0);
         try {
-            String madv = (String) tblDichVu.getValueAt(this.index, 0);
-            DichVu dv = dichVuDAO.selectByID(madv);
-            LoaiDichVu ldv = (LoaiDichVu) loaiDVDAO.selectByID(dv.getMaLDV());
-            if (dv != null) {
-                txtMaDV.setText(dv.getMaDV());
-                txtTenDV.setText(dv.getTenDV());
-                txtSoLuong.setText(dv.getSoLuong() + "");
-                cboDonViTinh.setSelectedItem(dv.getDonViTinh());
-                txtGia.setText(dv.getGiaDV() + "");
-                cboTrangThai.setSelectedItem(dv.getTrangThai());
-                cboLoaiDV.setSelectedItem(ldv.getTenLDV());
+            List<DichVu> list = dichVuDAO.selectFillTable();
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getMaDV(),
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getDonViTinh(),
+                    dv.getGiaDV(),
+                    dv.getMaLDV(),
+                    dv.getTrangThai()};
+                model.addRow(row);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi đổ dữ liệu lên txt");
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+    }
+
+    private void showDTDV(DichVu dv) {
+        txtMaDV.setText(dv.getMaDV());
+        txtTenDV.setText(dv.getTenDV());
+        txtSoLuong.setText(dv.getSoLuong() + "");
+        cboDonViTinh.getModel().setSelectedItem(donViTinhDAO.selectByDonViTinh(dv.getDonViTinh()));
+        txtGia.setText(dv.getGiaDV() + "");
+        cboTrangThai.getModel().setSelectedItem(trangthaiDVDAO.selectByIDTTDichVu(dv.getTrangThai()));
+        cboLoaiDV.getModel().setSelectedItem(loaiDVDAO.selectByMaLDV(dv.getMaLDV()));
     }
 
     private void fillComboLoaiDV() {
@@ -727,7 +750,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
             model.addElement(cd);
         }
     }
-    
+
     private void themDV() {
         DichVu dv = getForm();
         try {
@@ -751,7 +774,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     LoaiDichVu getFormLDV() {
         LoaiDichVu ldv = new LoaiDichVu();
         ldv.setTenLDV(txtTenLDV.getText());
@@ -763,10 +786,15 @@ public class JFrameDichVu extends javax.swing.JFrame {
         dv.setMaDV(txtMaDV.getText());
         dv.setTenDV(txtTenDV.getText());
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-        //dv.setMaLDV((String) cboLoaiDV.getSelectedItem());
-        dv.setDonViTinh(cboDonViTinh.getItemAt(0));
         dv.setGiaDV(Float.parseFloat(txtGia.getText()));
-        dv.setTrangThai(Integer.parseInt(cboTrangThai.getItemAt(0)));
+        
+        DonViTinh dvt = (DonViTinh) cboDonViTinh.getSelectedItem();
+        dv.setDonViTinh(dvt.getMaDVT());
+        LoaiDichVu ldv = (LoaiDichVu) cboLoaiDV.getSelectedItem();
+        dv.setMaLDV(ldv.getMaLDV());
+        TrangThaiDichVu ttdv = (TrangThaiDichVu) cboTrangThai.getSelectedItem();
+        dv.setTrangThai(ttdv.getIDTTDichVu());
+        
         return dv;
     }
 
@@ -779,13 +807,13 @@ public class JFrameDichVu extends javax.swing.JFrame {
         txtGia.setText("");
         cboTrangThai.setSelectedIndex(0);
     }
-    
+
     DonViTinh getFormDVT() {
         DonViTinh dvt = new DonViTinh();
         dvt.setKieuDVT(txtTenDonViTinh.getText());
         return dvt;
     }
-    
+
     private void themDVT() {
         DonViTinh dvt = getFormDVT();
         try {
@@ -797,7 +825,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     private void fillComboDonVT() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboDonViTinh.getModel();
         model.removeAllElements();
@@ -806,5 +834,47 @@ public class JFrameDichVu extends javax.swing.JFrame {
             model.addElement(cd);
         }
     }
-    
+    private void fillComboTrangThai() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTrangThai.getModel();
+        model.removeAllElements();
+        List<TrangThaiDichVu> list = trangthaiDVDAO.selectAll();
+        for (TrangThaiDichVu cd : list) {
+            model.addElement(cd);
+        }
+    }
+
+    private void edit() {
+        try {
+            String MaDV = (String) tblDichVu.getValueAt(index, 0);
+            DichVu dv = dichVuDAO.selectByID(MaDV);
+            if (dv != null) {
+                showDTDV(dv);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clear() {
+        txtMaDV.setText("");
+        txtTenDV.setText("");
+        txtSoLuong.setText("");
+        txtGia.setText("");
+        cboDonViTinh.setSelectedItem(0);
+        cboLoaiDV.setSelectedItem(0);
+        cboTrangThai.setSelectedItem(0);
+    }
+
+    private void update() {
+        DichVu model = getForm();
+        try {
+            dichVuDAO.sua(model);
+            fillToTableDV();
+            JOptionPane.showMessageDialog(this, "Sửa dịch vụ thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            e.printStackTrace();
+        }
+    }
+
 }

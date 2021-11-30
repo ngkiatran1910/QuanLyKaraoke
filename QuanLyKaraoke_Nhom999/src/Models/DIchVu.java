@@ -2,14 +2,14 @@ package Models;
 
 public class DichVu {
 
-    public String MaDV, TenDV, DonViTinh;
+    public String MaDV, TenDV;
     public float GiaDV;
-    public int TrangThai, SoLuong, MaLDV;
+    public int TrangThai, SoLuong, MaLDV,DonViTinh;
 
     public DichVu() {
     }
 
-    public DichVu(String MaDV, String TenDV, String DonViTinh, int MaLDV, float GiaDV, int TrangThai, int SoLuong) {
+    public DichVu(String MaDV, String TenDV, int DonViTinh, int MaLDV, float GiaDV, int TrangThai, int SoLuong) {
         this.MaDV = MaDV;
         this.TenDV = TenDV;
         this.DonViTinh = DonViTinh;
@@ -43,11 +43,11 @@ public class DichVu {
         this.TenDV = TenDV;
     }
 
-    public String getDonViTinh() {
+    public int getDonViTinh() {
         return DonViTinh;
     }
 
-    public void setDonViTinh(String DonViTinh) {
+    public void setDonViTinh(int DonViTinh) {
         this.DonViTinh = DonViTinh;
     }
 

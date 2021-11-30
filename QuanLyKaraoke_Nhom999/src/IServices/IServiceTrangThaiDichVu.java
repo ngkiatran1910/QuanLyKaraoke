@@ -1,10 +1,10 @@
+
 package IServices;
 
 import java.util.List;
 
-abstract public class IServiceDonViTinh<Model, Key> {
-
-    abstract public void them(Model model);
+abstract public class IServiceTrangThaiDichVu<Model, Key> {
+     abstract public void them(Model model);
 
     abstract public void sua(Model model);
 

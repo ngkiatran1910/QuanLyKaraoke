@@ -1,4 +1,3 @@
-
 package Services;
 
 import Models.DonViTinh;
@@ -7,12 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class DonViTinhService extends IServices.IServiceDonViTinh <DonViTinh, String> {
+public class DonViTinhService extends IServices.IServiceDonViTinh<DonViTinh, String> {
 
     String THEM_SQL = "Insert into DonViTinh values (?)";
     String SELECT_SQL = "SELECT * FROM DonViTinh";
-    
+
     @Override
     public void them(DonViTinh model) {
         jdbcUtilities.update(THEM_SQL, model.getKieuDVT());
@@ -30,7 +28,8 @@ public class DonViTinhService extends IServices.IServiceDonViTinh <DonViTinh, St
             ResultSet rs = jdbcUtilities.query(sql, args);
             while (rs.next()) {
                 DonViTinh model = new DonViTinh();
-                model.setKieuDVT(rs.getString("KieuDVT"));
+                model.setMaDVT(rs.getInt("MaDVT"));
+                model.setKieuDVT(rs.getString("KieuDVT"));                
                 list.add(model);
             }
             rs.getStatement().getConnection().close();
@@ -39,5 +38,23 @@ public class DonViTinhService extends IServices.IServiceDonViTinh <DonViTinh, St
             throw new RuntimeException(e);
         }
     }
-    
+
+    @Override
+    public void sua(DonViTinh model) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public DonViTinh selectByID(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public DonViTinh selectByDonViTinh(int key) {
+        String sql = "SELECT * FROM DonViTinh WHERE MaDVT=?";
+        List<DonViTinh> list = this.selectBySql(sql, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

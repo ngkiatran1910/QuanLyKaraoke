@@ -54,7 +54,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Component id="lblTenDV" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="26" max="32767" attributes="0"/>
                               <Component id="txtTenLDV" min="-2" pref="257" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -86,6 +86,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoiLDVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnHuy">
               <Properties>
@@ -97,7 +100,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblTenDV">
               <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xea;n d&#x1ecb;ch v&#x1ee5;:"/>
+                <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i d&#x1ecb;ch v&#x1ee5;:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTenLDV">

@@ -28,7 +28,8 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
 
     @Override
     public void them(LoaiDichVu model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO LoaiDichVu (TenLDV) VALUES (?)";
+        jdbcUtilities.update(sql,model.getTenLDV());
     }
 
     @Override
@@ -47,6 +48,12 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
     public List<LoaiDichVu> selectAll() {
         String sql = "SELECT * FROM LoaiDichVu";
         return selectBySql(sql);
+    }
+
+    public LoaiDichVu selectByMaLDV(int key) {
+        String sql = "SELECT * FROM LoaiDichVu WHERE MaLDV = ?";
+        List<LoaiDichVu> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
 }

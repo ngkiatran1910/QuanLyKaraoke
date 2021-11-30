@@ -1,24 +1,23 @@
-
 package Models;
 
-
 public class DonViTinh {
-    
-    public String MaDVT, KieuDVT;
+
+    public int MaDVT;
+    public String KieuDVT;
 
     public DonViTinh() {
     }
 
-    public DonViTinh(String MaDVT, String KieuDVT) {
+    public DonViTinh(int MaDVT, String KieuDVT) {
         this.MaDVT = MaDVT;
         this.KieuDVT = KieuDVT;
     }
 
-    public String getMaDVT() {
+    public int getMaDVT() {
         return MaDVT;
     }
 
-    public void setMaDVT(String MaDVT) {
+    public void setMaDVT(int MaDVT) {
         this.MaDVT = MaDVT;
     }
 
@@ -32,9 +31,8 @@ public class DonViTinh {
 
     @Override
     public String toString() {
-        return KieuDVT;
+        return  KieuDVT ;
     }
     
-    
-    
+
 }

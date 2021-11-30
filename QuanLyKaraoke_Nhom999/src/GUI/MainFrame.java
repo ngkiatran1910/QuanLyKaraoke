@@ -55,6 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
         timKT();
         dateNow();
         init();
+        
     }
 
     /**
