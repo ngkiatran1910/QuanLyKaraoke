@@ -131,4 +131,10 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
             throw new RuntimeException(e);
         }
     }
+    public List selectFillDV() {
+        String sql = "Select MaDV, TenDV, SoLuong, DonViTinh.MaDVT, GiaDV, LoaiDichVu.MaLDV, IDTTDichVu\n"
+                + "from LoaiDichVu join DichVu on LoaiDichVu.MaLDV=DichVu.MaLDV join DonViTinh on DichVu.MaDVT=DonViTinh.MaDVT";
+        return selectBySql_Table(sql);
+    }
+    
 }

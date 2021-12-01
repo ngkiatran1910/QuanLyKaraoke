@@ -693,7 +693,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
         model.setRowCount(0);
         try {
-            List<DichVu> list = dichVuDAO.selectFillTable();
+            List<DichVu> list = dichVuDAO.selectFillDV();
             for (DichVu dv : list) {
                 Object[] row = {
                     dv.getMaDV(),
@@ -714,7 +714,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
         model.setRowCount(0);
         try {
-            List<DichVu> list = dichVuDAO.selectFillTable();
+            List<DichVu> list = dichVuDAO.selectFillDV();
             for (DichVu dv : list) {
                 Object[] row = {
                     dv.getMaDV(),
