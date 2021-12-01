@@ -54,7 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
         timKT();
         dateNow();
         init();
-        
+
     }
 
     /**
@@ -1096,11 +1096,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên DV", "Số lượng", "Đơn giá", "Tổng tiền"
+                "Tên DV", "Số lượng", "Đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1518,16 +1518,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cboLoaiDVActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
-        
-        
-        if (tabTang.getSelectedIndex()==0) {
+
+        if (tabTang.getSelectedIndex() == 0) {
             TaoHoaDon();
-        }else if(tabTang.getSelectedIndex()==1){
+        } else if (tabTang.getSelectedIndex() == 1) {
             TaoHoaDon2();
-        }else if(tabTang.getSelectedIndex()==2){
+        } else if (tabTang.getSelectedIndex() == 2) {
             TaoHoaDon3();
         }
-        
+
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void tblTang3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTang3MouseClicked
@@ -1567,6 +1566,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void cboDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDichVuActionPerformed
         // TODO add your handling code here:
+        fillToTableDV();
     }//GEN-LAST:event_cboDichVuActionPerformed
 
     private void btnThemVaoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVaoPActionPerformed
@@ -1795,7 +1795,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
                 while (true) {
                     Date d = new Date();
-                    lblTimeBD.setText(date.format(d));
+//                    lblTimeBD.setText(date.format(d));
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -1815,7 +1815,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
                 while (true) {
                     Date d = new Date();
-                    lblTimeKT.setText(date.format(d));
+//                    lblTimeKT.setText(date.format(d));
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -1835,7 +1835,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
                 while (true) {
                     Date d = new Date();
-                    lblNgay.setText("Ngày: " + date.format(d));
+//                    lblNgay.setText("Ngày: " + date.format(d));
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -1873,6 +1873,7 @@ public class MainFrame extends javax.swing.JFrame {
         showDT();
 //      fillComBoxKhachHang();
         System.out.println(UseUtilies.USER.getMaNV());
+        fillComboDV();
     }
 
     private void fillTable1() {
@@ -1887,8 +1888,8 @@ public class MainFrame extends javax.swing.JFrame {
                         Object[] row = {
                             p.getMaP(),
                             lp.getTenLP(),
-//                            p.kh = (String) cboKhachHang.getSelectedItem(),
-                            p.kh =  null,
+                            //                            p.kh = (String) cboKhachHang.getSelectedItem(),
+                            p.kh = null,
                             p.getTrangThai()
                         };
                         model1.addRow(row);
@@ -2002,7 +2003,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtTrangThaiHD.setText(model.getTrangThai() + "");
         txtLoaiPhongHD.setText(lp.getTenLP());
         txtGiaTheoGioHD.setText(lp.getGiaTheoGio() + "");
-        lblTrangThai.setText(model.getTrangThai() + "");
+//        lblTrangThai.setText(model.getTrangThai() + "");
     }
 
     void setModelThemDV(Phong model) {
@@ -2084,47 +2085,47 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void fillToComboHinhThucTT() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboHTTT.getModel();
-        model.removeAllElements();
-        List<ThanhToan> listtt = tts.selectAll();
-        for (ThanhToan tt : listtt) {
-            model.addElement(tt);
-        }
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cboHTTT.getModel();
+//        model.removeAllElements();
+//        List<ThanhToan> listtt = tts.selectAll();
+//        for (ThanhToan tt : listtt) {
+//            model.addElement(tt);
+//        }
     }
 
     private void fillToComboTrangThaiHD() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTrangThai.getModel();
-        model.removeAllElements();
-        List<TrangThaiThanhToan> listtttt = tttts.selectAll();
-        for (TrangThaiThanhToan tttt : listtttt) {
-            model.addElement(tttt);
-        }
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTrangThai.getModel();
+//        model.removeAllElements();
+//        List<TrangThaiThanhToan> listtttt = tttts.selectAll();
+//        for (TrangThaiThanhToan tttt : listtttt) {
+//            model.addElement(tttt);
+//        }
     }
 
     private void layTime() {
-        HoaDonChiTiet ct = new HoaDonChiTiet();
-        ct.setMaHD(Integer.parseInt(txtMaHD.getText()));
-        ct.setGioBD(dateUtilities.toDate(lblTimeBD.getText()));
-        ct.setMaP((String) tblTang1.getValueAt(index, 0));
-        try {
-            hdcts.update(ct);
-            JOptionPane.showMessageDialog(this, "Bắt đầu thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Bắt đầu thất bại");
-        }
+//        HoaDonChiTiet ct = new HoaDonChiTiet();
+//        ct.setMaHD(Integer.parseInt(txtMaHD.getText()));
+//        ct.setGioBD(dateUtilities.toDate(lblTimeBD.getText()));
+//        ct.setMaP((String) tblTang1.getValueAt(index, 0));
+//        try {
+//            hdcts.update(ct);
+//            JOptionPane.showMessageDialog(this, "Bắt đầu thành công");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Bắt đầu thất bại");
+//        }
     }
 
     private void ktTime() {
-        HoaDonChiTiet ct = new HoaDonChiTiet();
-        ct.setMaHD(Integer.parseInt(txtMaHD.getText()));
-        ct.setGioBD(dateUtilities.toDate(lblTimeKT.getText()));
-        ct.setMaP((String) tblTang1.getValueAt(index, 0));
-        try {
-            hdcts.exitTime(ct);
-            JOptionPane.showMessageDialog(this, "Kết thúc thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Kết thúc thất bại");
-        }
+//        HoaDonChiTiet ct = new HoaDonChiTiet();
+//        ct.setMaHD(Integer.parseInt(txtMaHD.getText()));
+//        ct.setGioBD(dateUtilities.toDate(lblTimeKT.getText()));
+//        ct.setMaP((String) tblTang1.getValueAt(index, 0));
+//        try {
+//            hdcts.exitTime(ct);
+//            JOptionPane.showMessageDialog(this, "Kết thúc thành công");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Kết thúc thất bại");
+//        }
     }
 
     private void showDT() {
@@ -2154,7 +2155,7 @@ public class MainFrame extends javax.swing.JFrame {
         p.setMaP(lblMapp.getText());
         return p;
     }
-    
+
     private void TaoHoaDon() {
         HoaDon hd = getFormHoaDon();
 
@@ -2165,13 +2166,14 @@ public class MainFrame extends javax.swing.JFrame {
             hds.them(hd);
             updateTrangThai();
             JOptionPane.showMessageDialog(this, "Thêm thành công: ");
-            tblTang1.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang1.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);
             tblTang1.setValueAt("2", indext, 3);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
+
     private void TaoHoaDon2() {
         HoaDon hd = getFormHoaDon();
 
@@ -2182,13 +2184,14 @@ public class MainFrame extends javax.swing.JFrame {
             hds.them(hd);
             updateTrangThai();
             JOptionPane.showMessageDialog(this, "Thêm thành công: ");
-            tblTang2.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang2.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);
             tblTang2.setValueAt("2", indext, 3);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
+
     private void TaoHoaDon3() {
         HoaDon hd = getFormHoaDon();
 
@@ -2199,13 +2202,14 @@ public class MainFrame extends javax.swing.JFrame {
             hds.them(hd);
             updateTrangThai();
             JOptionPane.showMessageDialog(this, "Thêm thành công: ");
-            tblTang3.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);  
+            tblTang3.setValueAt(cboKhachHang.getSelectedItem(), indext, 2);
             tblTang3.setValueAt("2", indext, 3);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
+
     HoaDon getFormHoaDon() {
         HoaDon hd = new HoaDon();
         KhachHangService khs = new KhachHangService();
@@ -2234,6 +2238,37 @@ public class MainFrame extends javax.swing.JFrame {
         List<KhachHang> lkh = khs.selectAll();
         for (KhachHang khachHang : lkh) {
             cbmodel.addElement(khachHang);
+        }
+    }
+
+    private void fillToTableDV() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+        model.setRowCount(0);
+        try {
+            LoaiDichVu loaidv = (LoaiDichVu) cboDichVu.getSelectedItem();
+            List<DichVu> listdv = dvs.selectByLoaiDV(loaidv.getMaLDV());
+            for (DichVu dv : listdv) {
+                Object[] row = {
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getGiaDV()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Lỗi fillToTableDV");
+        }
+    }
+
+    private void fillComboDV() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboDichVu.getModel();
+            model.removeAllElements();
+            List<LoaiDichVu> listdv = ldvs.selectAll();
+            for (LoaiDichVu dv : listdv) {
+                model.addElement(dv);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi fillComboDV");
         }
     }
 }

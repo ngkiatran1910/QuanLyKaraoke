@@ -14,10 +14,10 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         return selectBySql(sql);
     }
 
-    public List selectFillTable() {
-        String sql = "Select MaDV, TenDV, SoLuong, DonViTinh.MaDVT, GiaDV, LoaiDichVu.MaLDV, IDTTDichVu\n"
-                + "from LoaiDichVu join DichVu on LoaiDichVu.MaLDV=DichVu.MaLDV join DonViTinh on DichVu.MaDVT=DonViTinh.MaDVT";
-        return selectBySql_Table(sql);
+    public DichVu selectFillTable(int key) {
+        String sql = "SELECT * FROM DichVu WHERE MaLDV = ?";
+        List<DichVu> listfil = selectBySql(sql, key);
+        return listfil.size() > 0 ? listfil.get(0) : null;
     }
 
     public List selectTop5() {
