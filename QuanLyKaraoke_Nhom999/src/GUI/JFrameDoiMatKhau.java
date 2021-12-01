@@ -46,7 +46,7 @@ public class JFrameDoiMatKhau extends javax.swing.JFrame {
         txtMKHienTai = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(254, 204, 213));
 

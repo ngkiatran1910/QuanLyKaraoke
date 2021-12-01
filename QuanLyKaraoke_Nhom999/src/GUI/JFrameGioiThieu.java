@@ -35,7 +35,7 @@ public class JFrameGioiThieu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý karaoke - Giới thiệu");
 
         jPanel4.setBackground(new java.awt.Color(254, 204, 213));
