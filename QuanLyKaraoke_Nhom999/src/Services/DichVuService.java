@@ -36,7 +36,7 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
                 model.getTrangThai(),
                 model.getMaLDV(),
                 model.getDonViTinh()
-                );
+        );
     }
 
     @Override
@@ -130,5 +130,33 @@ public class DichVuService extends IServices.IServiceDichVu<DichVu, String> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected List<DichVu> selectMaDV(String sql, Object... args) {
+        List<DichVu> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                DichVu model = new DichVu();
+                model.setMaDV(rs.getString("MaDV"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<DichVu> selectByTenDV(String key) {
+        String sql = "SELECT MaDV FROM DichVu WHERE TenDV = ?";
+        return selectMaDV(sql, key);
+    }
+
+    public List<DichVu> updateDV(int Madv) {
+        String sql = "update DichVu\n"
+                + "set SoLuong = SoLuong - (Select SUM(Soluong) FROM CTDICHVU WHERE MaDV = ?)\n"
+                + "where MaDV = ?";
+        return selectMaDV(sql, Madv,Madv);
     }
 }

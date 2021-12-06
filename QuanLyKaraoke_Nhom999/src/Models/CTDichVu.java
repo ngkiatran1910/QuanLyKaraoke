@@ -11,7 +11,7 @@ package Models;
 public class CTDichVu {
     public String  MaP,MaDV,TenDV;
     public int SoLuong,MaHD;
-    public float DonGia;
+    public float DonGia, Tongtien;
 
     public String getMaP() {
         return MaP;
@@ -59,6 +59,14 @@ public class CTDichVu {
 
     public void setDonGia(float DonGia) {
         this.DonGia = DonGia;
+    }
+
+    public float getTongtien() {
+        return Tongtien;
+    }
+
+    public void setTongtien(float Tongtien) {
+        this.Tongtien = Tongtien;
     }
 
     @Override
