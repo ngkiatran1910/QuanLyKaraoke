@@ -75,4 +75,11 @@ public class PhongService extends IServices.IServicePhong<Phong, String> {
         String sql = "Select * from Phong where Tang=?";
         return selectBySql(sql, tang); 
     }
+    
+    public void UDPhong(Phong p) {
+        String sql = "UPDATE Phong SET IDTTPhong = ? WHERE MaP = ?";
+        jdbcUtilities.update(sql,
+                p.getTrangThai(),
+                p.getMaP());
+    }
 }

@@ -135,4 +135,150 @@ public class HoaDonChiTietService extends IServiceHoaDonChiTiet<HoaDonChiTiet, S
             throw new RuntimeException(e);
         }
     }
+
+    protected List<HoaDonChiTiet> selectTG(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setTongGio(rs.getFloat("TongGio"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<HoaDonChiTiet> selectTienGio(String mahd) {
+        String sql = "Select ROUND(TongGio/60, 1)*GiaTheoGio as TienGio from CTHoaDon\n"
+                + "join Phong on CTHoaDon.MaP = Phong.MaP\n"
+                + "join LoaiPhong on Phong.MaLP = LoaiPhong.MaLP\n"
+                + "where MaHD = ?";
+        return this.selectByTienGio(sql, mahd);
+    }
+    
+    protected List<HoaDonChiTiet> selectByTienGio(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setTienGio(rs.getFloat("TienGio"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<HoaDonChiTiet> selectTongGio(String mahd) {
+        String sql = "Select ROUND(TongGio/60, 1) AS TGio  From CTHoaDon where MaHD = ?";
+        return this.selectByTongGio(sql, mahd);
+    }
+
+    protected List<HoaDonChiTiet> selectByTongGio(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setTongGio(rs.getFloat("TGio"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateTimeKT(HoaDonChiTiet model) {
+        String sql = "update CTHoaDon set GioKT = ? where MaHD = ?";
+        jdbcUtilities.update(sql, model.getGioKT(), model.getMaHD());
+    }
+
+    public void updateTongGio(HoaDonChiTiet model) {
+        String sql = "UPDATE CTHoaDon SET TongGio = DATEDIFF(MINUTE, GioBD, GioKT) WHERE MaHD = ?";
+        jdbcUtilities.update(sql, model.getMaHD());
+    }
+
+    public void updateMaTT(HoaDonChiTiet model) {
+        String sql = "UPDATE CTHoaDon SET MaTT = ?, NgayXuatHD = ?, IDTTThanhToan = 1 WHERE MaHD = ?";
+        jdbcUtilities.update(sql, model.getMaTT(), model.getNgayXuatHD(), model.getMaHD());
+    }
+
+    public List<HoaDonChiTiet> selectGio(int maHD) {
+        String sql = "Select TienGio, NgayDat, GioBD, GioKT from CTHoaDon where MaHD = ?";
+        return this.selectByGio(sql, maHD);
+    }
+
+    protected List<HoaDonChiTiet> selectByGio(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setTienGio(rs.getFloat("TienGio"));
+                model.setNgayDat(rs.getDate("NgayDat"));
+                model.setGioBD(rs.getTime("GioBD"));
+                model.setGioKT(rs.getTime("GioKT"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public List<HoaDonChiTiet> selectTienDV(String maHD) {
+        String sql = "Select SUM(SoLuong*DonGia) AS TongTienDV From CTDichVu WHERE MaHD=?";
+        return this.selectByTienDV(sql, maHD);
+    }
+    
+    protected List<HoaDonChiTiet> selectByTienDV(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setTienDV(rs.getFloat("TongTienDV"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateTien(HoaDonChiTiet model) {
+        String sql = "UPDATE CTHoaDon SET TienGio = ?, TienDV = ? WHERE MaHD = ?";
+        jdbcUtilities.update(sql, model.getTienGio(), model.getTienDV(), model.getMaHD());
+    }
+    protected List<HoaDonChiTiet> selectByMAP(String sql, Object... args) {
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                HoaDonChiTiet model = new HoaDonChiTiet();
+                model.setMaHD(rs.getInt("MaHDmax"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<HoaDonChiTiet> selectMaHD(String MaP) {
+        String sql = "Select MAX(MaHD) AS MaHDmax from CTHoaDon where MaP = ?";
+        return selectByMAP(sql, MaP);
+    }
+    
 }

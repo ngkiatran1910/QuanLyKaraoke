@@ -180,6 +180,7 @@ public class JFrameDangNhap extends javax.swing.JFrame {
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
+                    e.printStackTrace();
                 }
             }
 

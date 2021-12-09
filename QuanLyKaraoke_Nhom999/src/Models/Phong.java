@@ -73,4 +73,13 @@ public class Phong {
 
     public String kh = null;
     
+    public String TTP(int tt){
+        if(tt == 1){
+            return "Trống";
+        }else {
+            return "Đang sử dụng";
+        }
+        
+    }
+    
 }

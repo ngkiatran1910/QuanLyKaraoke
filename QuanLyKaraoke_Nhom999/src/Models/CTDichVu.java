@@ -11,8 +11,29 @@ package Models;
 public class CTDichVu {
     public String  MaP,MaDV,TenDV;
     public int SoLuong,MaHD;
-    public float DonGia, Tongtien;
+    public float DonGia, TongTien;
 
+    public CTDichVu() {
+    }
+
+    public CTDichVu(String MaP, String MaDV, String TenDV, int SoLuong, int MaHD, float DonGia, float TongTien) {
+        this.MaP = MaP;
+        this.MaDV = MaDV;
+        this.TenDV = TenDV;
+        this.SoLuong = SoLuong;
+        this.MaHD = MaHD;
+        this.DonGia = DonGia;
+        this.TongTien = TongTien;
+    }
+
+    public float getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(float TongTien) {
+        this.TongTien = TongTien;
+    }
+    
     public String getMaP() {
         return MaP;
     }
@@ -59,14 +80,6 @@ public class CTDichVu {
 
     public void setDonGia(float DonGia) {
         this.DonGia = DonGia;
-    }
-
-    public float getTongtien() {
-        return Tongtien;
-    }
-
-    public void setTongtien(float Tongtien) {
-        this.Tongtien = Tongtien;
     }
 
     @Override

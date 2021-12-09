@@ -47,5 +47,25 @@ public class TrangThaiThanhToanService extends IServiceTrangThaiThanhToan<TrangT
             throw new RuntimeException(e);
         }
     }
+    
+    protected List<TrangThaiThanhToan> selectByIDTTThanhToan(String sql, Object... args) {
+        List<TrangThaiThanhToan> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                TrangThaiThanhToan model = new TrangThaiThanhToan();
+                model.setIDTTThanhToan(rs.getInt("IDTTThanhToan"));
+                list.add(model);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public List<TrangThaiThanhToan> selectIDTTThanhToan(String ttt) {
+        String sql = "Select IDTTThanhToan from TrangThaiThanhToan where TenTrangThai = ?";
+        return this.selectByIDTTThanhToan(sql, ttt);
+    }
 }
