@@ -27,6 +27,7 @@ public class JFrameDichVu extends javax.swing.JFrame {
         fillToTableDV();
         fillComboDonVT();
         fillComboTrangThai();
+//        fillTableTop5();
         diaThemLDV.setLocationRelativeTo(null);
         diaDonViTinh.setLocationRelativeTo(null);
     }
@@ -710,27 +711,6 @@ public class JFrameDichVu extends javax.swing.JFrame {
         }
 
     }
-    private void fillToTableDVTOP5() {
-        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
-        model.setRowCount(0);
-        try {
-            List<DichVu> list = dichVuDAO.selectFillTable();
-            for (DichVu dv : list) {
-                Object[] row = {
-                    dv.getMaDV(),
-                    dv.getTenDV(),
-                    dv.getSoLuong(),
-                    dv.getDonViTinh(),
-                    dv.getGiaDV(),
-                    dv.getMaLDV(),
-                    dv.getTrangThai()};
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void showDTDV(DichVu dv) {
         txtMaDV.setText(dv.getMaDV());
@@ -873,6 +853,27 @@ public class JFrameDichVu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sửa dịch vụ thành công");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTableTop5() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVuTop5.getModel();
+        model.setRowCount(0);
+        try {
+            List<DichVu> list = dichVuDAO.selectTop5();
+            for (DichVu dv : list) {
+                Object[] row = {
+                    dv.getMaDV(),
+                    dv.getTenDV(),
+                    dv.getSoLuong(),
+                    dv.getDonViTinh(),
+                    dv.getGiaDV(),
+                    dv.getMaLDV(),
+                    dv.getTrangThai()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

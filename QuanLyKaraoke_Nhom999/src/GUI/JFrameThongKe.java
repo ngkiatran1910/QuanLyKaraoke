@@ -4,6 +4,15 @@
  */
 package GUI;
 
+import Models.HoaDonChiTiet;
+import Models.LoaiDichVu;
+import Services.HoaDonChiTietService;
+import Services.LoaiDichVuService;
+import Services.ThongKeService;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -13,11 +22,15 @@ public class JFrameThongKe extends javax.swing.JFrame {
     /**
      * Creates new form JFrameThongKe
      */
+    Services.ThongKeService tks = new ThongKeService();
     public JFrameThongKe() {
         initComponents();
         setLocationRelativeTo(null);
+        fillTableHoaDonDaXuat();
+        fillComBoxLDV();
+        fillComBoxNam();
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,19 +45,19 @@ public class JFrameThongKe extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblHoaDonDaXuat = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboNam = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblTKTN = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboLoaiDichVu = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblDV = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý karaoke - Thống kê");
@@ -55,33 +68,39 @@ public class JFrameThongKe extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Quản Lý Thống Kê");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDonDaXuat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Số Phòng", "Ngày", "Số Giờ Sử Dụng", "Tiền Dịch Vụ", "Tổng Tiền"
+                "Mã Hóa Đơn ", "Số Phòng", "Ngày", "Tổng Giờ", "Tiền Dịch Vụ", "Tổng Tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHoaDonDaXuat);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Hóa Đơn Đã Xuất", jPanel2);
@@ -91,29 +110,33 @@ public class JFrameThongKe extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Tổng tiền của tháng");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNam.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cboNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNamActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblTKTN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Dịch Vụ", "Tên Dịch Vụ", "Đơn Vị", "Đã Sử Dụng", "Thành Tiền"
+                "Ngày", "Tổng hóa đơn đã xuất", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblTKTN);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Tháng");
+        jLabel4.setText("Năm");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
@@ -122,17 +145,14 @@ public class JFrameThongKe extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(200, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE))
@@ -142,9 +162,9 @@ public class JFrameThongKe extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 585, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 583, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,10 +183,14 @@ public class JFrameThongKe extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Loại Dịch Vụ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoaiDichVu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cboLoaiDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLoaiDichVuActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -182,7 +206,7 @@ public class JFrameThongKe extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblDV);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -192,7 +216,7 @@ public class JFrameThongKe extends javax.swing.JFrame {
                 .addGap(151, 151, 151)
                 .addComponent(jLabel2)
                 .addGap(50, 50, 50)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboLoaiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(260, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -202,9 +226,9 @@ public class JFrameThongKe extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboLoaiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dịch Vụ", jPanel4);
@@ -246,6 +270,14 @@ public class JFrameThongKe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboLoaiDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiDichVuActionPerformed
+    fillTableDichVu();
+    }//GEN-LAST:event_cboLoaiDichVuActionPerformed
+
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
+    fillTableTheoNam();
+    }//GEN-LAST:event_cboNamActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,8 +314,8 @@ public class JFrameThongKe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cboLoaiDichVu;
+    private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -296,9 +328,75 @@ public class JFrameThongKe extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblDV;
+    private javax.swing.JTable tblHoaDonDaXuat;
+    private javax.swing.JTable tblTKTN;
     // End of variables declaration//GEN-END:variables
+
+    private void fillTableHoaDonDaXuat() {
+        DefaultTableModel model = (DefaultTableModel) tblHoaDonDaXuat.getModel();
+        model.setRowCount(0);
+        List<Object[]> list =  tks.getHoaDonDaXuat();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+//
+    private void fillComBoxLDV() {
+        Services.LoaiDichVuService ldvs = new LoaiDichVuService();
+        DefaultComboBoxModel model= (DefaultComboBoxModel) cboLoaiDichVu.getModel();
+        model.removeAllElements();
+        
+        List<LoaiDichVu>  list  = ldvs.selectAll();
+        for (LoaiDichVu loaiDichVu : list) {      
+            model.addElement(loaiDichVu);
+        }
+        fillTableDichVu() ;
+    }
+
+    private void fillTableDichVu() {
+        Services.LoaiDichVuService ldvs = new LoaiDichVuService();
+        DefaultTableModel model = (DefaultTableModel) tblDV.getModel();
+        model.setRowCount(0);       
+        LoaiDichVu loaidv = (LoaiDichVu) cboLoaiDichVu.getSelectedItem();
+        LoaiDichVu ldv = (LoaiDichVu) ldvs.selectByTen(loaidv.TenLDV);
+//        System.out.println(loaidv.TenLDV);
+        List<Object[]> list =  tks.getDV(ldv.getMaLDV());
+        for (Object[] row : list) {
+           model.addRow(row);
+        }
+    }
+     private void fillTableTheoNam() {
+        Services.HoaDonChiTietService hdcts = new HoaDonChiTietService();
+        DefaultTableModel model = (DefaultTableModel) tblTKTN.getModel();
+        model.setRowCount(0);       
+        int nam =   (int) cboNam.getSelectedItem();
+        //int thang =   (int) cboThang.getSelectedItem();
+        List<Object[]> list =  hdcts.getBangTKTN(nam);
+        for (Object[] row : list) {
+           model.addRow(row);
+        }
+    }
+    private void fillComBoxNam() {
+        Services.HoaDonChiTietService hdcts = new HoaDonChiTietService();
+        DefaultComboBoxModel model= (DefaultComboBoxModel) cboNam.getModel();
+        model.removeAllElements();
+        List<Integer>  list  = hdcts.selectYears();
+        for (Integer hoaDonChiTiet : list) {      
+            model.addElement(hoaDonChiTiet);
+        }
+        
+    }
+//    private void fillComBoxThang() {
+//        Services.HoaDonChiTietService hdcts = new HoaDonChiTietService();
+//        DefaultComboBoxModel model= (DefaultComboBoxModel) cboNam.getModel();
+//        model.removeAllElements();
+//     //   int nam =   (int) cboNam.getSelectedItem();
+//        List<Integer>  list  = hdcts.selectMONTH(2021);
+//        for (Integer hoaDonChiTiet : list) {      
+//            model.addElement(hoaDonChiTiet);
+//        }
+//       // fillTableTheoNam() ;
+//    }
 }
