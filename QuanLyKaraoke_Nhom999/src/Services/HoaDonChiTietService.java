@@ -280,5 +280,42 @@ public class HoaDonChiTietService extends IServiceHoaDonChiTiet<HoaDonChiTiet, S
         String sql = "Select MAX(MaHD) AS MaHDmax from CTHoaDon where MaP = ?";
         return selectByMAP(sql, MaP);
     }
-    
+    public List<Integer> selectYears() {
+        String sql = "SELECT year(NgayXuatHD) as Nam FROM CTHoaDon\n"
+                + "	Group BY year(NgayXuatHD)\n"
+                + "	ORDER BY year(NgayXuatHD) DESC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtilities.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = jdbcUtilities.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Object[]> getBangTKTN(int nam ) {
+        String sql = "Exec SP_BANGTKNAM ?";
+        String[] cols = {"NgayXuatHD", "SoHoaDonXuat", "TienTT"};
+        return this.getListOfArray(sql, cols,nam);
+    }
 }

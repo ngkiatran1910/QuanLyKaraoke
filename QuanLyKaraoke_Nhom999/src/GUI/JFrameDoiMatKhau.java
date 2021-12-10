@@ -7,7 +7,6 @@ package GUI;
 import Models.TaiKhoan;
 import Services.TaiKhoanService;
 import Utilities.validateUtilities;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -212,7 +211,13 @@ public class JFrameDoiMatKhau extends javax.swing.JFrame {
         if (validateUtilities.checkRong(txtNhapLaiMatKhau.getText(), "Mật khẩu nhập lại không được trống!")) {
             return;
         }
-    DoiMatKhau();
+    
+        try {
+            DoiMatKhau();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi đổi mật khẩu !");
+        }
+
     }//GEN-LAST:event_txtXacNhanActionPerformed
 
     /**

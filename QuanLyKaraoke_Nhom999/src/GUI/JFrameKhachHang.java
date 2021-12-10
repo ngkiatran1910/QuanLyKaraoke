@@ -1,10 +1,7 @@
 package GUI;
-import java.sql.Connection;
 import Models.KhachHang;
 import Services.KhachHangService;
 import Utilities.validateUtilities;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -316,11 +313,23 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         if (validateUtilities.checkRong(txtSDT.getText(), "Số điện thoại không được trống!")) {
             return;
         }
-        if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        Boolean a;
+        if (a = txtSDT.getText().matches(reg)) {
+        } else {
+            JOptionPane.showMessageDialog(this, "Định dạng số điện thoại sai ?");
+            txtSDT.requestFocus();
             return;
         }
+//        if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
+//            return;
+//        }
 
-        add();
+        try {
+           add(); 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi thêm");
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -347,11 +356,14 @@ public class JFrameKhachHang extends javax.swing.JFrame {
 //         if (validateUtilities.checkSDT(txtSDT.getText(), "Số điện thoại sai định dạng!")) {
 //            return;
 //        }
-        update();
+        try {
+           update();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi sửa!");
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        txtMaKH.setEditable(true);
         clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
@@ -456,9 +468,13 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }
 
     private void setForm(KhachHang kh) {
-        txtMaKH.setText(kh.getMaKH());
+        try {
+            txtMaKH.setText(kh.getMaKH());
         txtTenKhachHang.setText(kh.getTenKH());
         txtSDT.setText(kh.getSDT());
+        } catch (Exception e) {
+        }
+        
     }
     private void checkTrung(){
 //         try {
@@ -477,7 +493,9 @@ public class JFrameKhachHang extends javax.swing.JFrame {
 //        }
     }
     private void add() {
-        KhachHang kh = getForm();
+        int hoi = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm không ?");
+        if (hoi ==JOptionPane.YES_OPTION) {
+            KhachHang kh = getForm();
         try {
             
             Service.them(kh);
@@ -488,9 +506,17 @@ public class JFrameKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
             e.printStackTrace();
         }
+        }
+        
     }
 
     private void update() {
+        int hoi = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn sửa không ?");
+        if (hoi ==JOptionPane.YES_OPTION) {
+            KhachHang kh1 = (KhachHang) Service.selectByID(txtMaKH.getText());
+        if (kh1.getMaKH()==null) {
+            System.out.println(kh1.getMaKH());
+        }
         KhachHang kh = getForm();
         try {
             Service.sua(kh);
@@ -500,7 +526,9 @@ public class JFrameKhachHang extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Sửa mới thất bại!");
             System.out.println(e);
+        }  
         }
+        
     }
 
     private void clearForm() {
@@ -510,10 +538,13 @@ public class JFrameKhachHang extends javax.swing.JFrame {
     }
 
     private void edit() {
-
-        String makh = (String) tblKhachHang.getValueAt(indext, 0);
+        try {
+            String makh = (String) tblKhachHang.getValueAt(indext, 0);
         KhachHang kh = (KhachHang) Service.selectByID(makh);
         setForm(kh);
+        } catch (Exception e) {
+        }
+        
 
     }
      private void fillTableTop5() {

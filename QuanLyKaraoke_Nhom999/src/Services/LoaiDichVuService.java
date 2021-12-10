@@ -43,6 +43,11 @@ public class LoaiDichVuService extends IServices.IServiceLoaiDichVu<LoaiDichVu, 
         List<LoaiDichVu> list = selectBySql(sql, key);
         return list.size() > 0 ? list.get(0) : null;
     }
+        public LoaiDichVu selectByTen(String key) {
+        String sql = "SELECT * FROM LoaiDichVu WHERE TenLDV = ?";
+        List<LoaiDichVu> list = selectBySql(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
+    }
 
     @Override
     public List<LoaiDichVu> selectAll() {
